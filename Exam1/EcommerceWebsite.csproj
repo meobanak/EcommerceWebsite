@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\LiteDBContext.cs~RF5ad14599.TMP" />
+    <None Remove="Service\LiteDBContext.cs~RF5ad14599.TMP" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,11 +21,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\LiteDB\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\imagezoom.js" />
+    <None Include="wwwroot\js\jquery.flexslider.js" />
+    <None Include="wwwroot\js\jquery.magnific-popup.js" />
+    <None Include="wwwroot\js\jquery.min.js" />
+    <None Include="wwwroot\js\memenu.js" />
+    <None Include="wwwroot\js\responsiveslides.min.js" />
+    <None Include="wwwroot\js\simpleCart.min.js" />
     <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\wow.min.js" />
   </ItemGroup>
 
 

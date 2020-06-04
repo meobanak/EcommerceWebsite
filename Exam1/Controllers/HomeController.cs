@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Exam1.Models;
-using Exam1.Data;
-using Exam1.Data.Interface;
-using Exam1.Data.LiteDB;
+using Exam1.Service.Interface;
 
 namespace Exam1.Controllers
 {
     public class HomeController : Controller
     {
-        private IProduct service;
+        private IIndex service;
 
-        public HomeController(IProduct services)
+
+        public HomeController(IIndex services)
         {
             service = services;
         }
@@ -26,10 +25,12 @@ namespace Exam1.Controllers
             var result = service.List();
             return View(result);
         }
+
         [HttpGet("ID", Name ="GetOne")]
         public IActionResult Detail(int ID)
         {
             var result = service.Get(ID);
+            ViewBag.FSize = service.CategoryList();
             return View(result);
         }
         [HttpPost]

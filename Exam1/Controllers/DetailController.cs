@@ -4,19 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Exam1.Controllers
+namespace EcommerceWebsite.Controllers
 {
-    public class Exam1Controller : Controller
+    public class DetailController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult GetInformation()
-        {
-
-            return View();
-        }
-    } 
+    }
 }

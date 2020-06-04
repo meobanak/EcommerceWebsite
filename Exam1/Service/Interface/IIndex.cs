@@ -1,16 +1,17 @@
-﻿using Exam1.Data.LiteDB;
+﻿using Exam1.Service.Interface;
 using Exam1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Exam1.Data.Interface
+namespace Exam1.Service.Interface
 {
-    public interface IProduct
+    public interface IIndex
     {
         List<Product> List();
         Product Get(int ID);
+        List<FSize> CategoryList();
         bool Insert(Product motobike);
         bool Update(Product motobike);
         int Delete(int ID);

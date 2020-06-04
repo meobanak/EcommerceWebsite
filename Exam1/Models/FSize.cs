@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EcomerceWebsite.Models
+namespace Exam1.Models
 {
     public class FSize
     {

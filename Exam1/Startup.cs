@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Exam1.Data;
-using Exam1.Data.Interface;
-using Exam1.Data.LiteDB;
-using Exam1.Data.LiteDB.EcomerceFashionService;
-using Exam1.LiteDB.Data;
+using EcommerceWebsite.Database;
+using EcommerceWebsite.Database.LiteDB;
 using Exam1.Models;
+using Exam1.Service.Interface;
+using Exam1.Service.LiteDB;
+using Exam1.Service.LiteDB.EcomerceFashionService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,9 +31,12 @@ namespace Exam1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            #region Init LiteDB
             services.Configure<LiteDBOptions>(Configuration.GetSection("LiteDbOptions"));
             services.AddSingleton<ILiteDBContext, LiteDBContext>();
-            services.AddScoped<IProduct, ProductService>();
+            services.AddScoped<IDBInit, LiteDB_InitFashionShop>();
+            services.AddScoped<IIndex, LiteDB_Index>();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
