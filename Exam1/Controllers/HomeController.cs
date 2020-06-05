@@ -50,5 +50,11 @@ namespace Exam1.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet]
+        public IActionResult SignIn()
+        {
+            return View("~/Views/Register/SignIn.cshtml");
+        }
     }
 }

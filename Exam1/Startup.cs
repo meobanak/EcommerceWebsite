@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using EcommerceWebsite.Database;
 using EcommerceWebsite.Database.LiteDB;
+using EcommerceWebsite.Service.Interface;
+using EcommerceWebsite.Service.LiteDB.EcomerceFashionService;
 using Exam1.Models;
 using Exam1.Service.Interface;
 using Exam1.Service.LiteDB;
@@ -36,6 +38,7 @@ namespace Exam1
             services.AddSingleton<ILiteDBContext, LiteDBContext>();
             services.AddScoped<IDBInit, LiteDB_InitFashionShop>();
             services.AddScoped<IIndex, LiteDB_Index>();
+            services.AddTransient<IRegister, LiteDB_Register>();
             #endregion
         }
 

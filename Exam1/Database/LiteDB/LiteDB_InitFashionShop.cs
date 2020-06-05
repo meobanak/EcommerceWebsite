@@ -136,6 +136,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product.IsActive = true;
                 product.SizeID = 1;
                 product.ColorID = 1;
+                product.Gender = 1;
                 product.imageSrc = "https://outdoor-and-country-res.cloudinary.com/image/upload/e_trim:2/bo_8px_solid_white/c_pad,b_white,w_1000,h_1200,f_auto,q_auto/v1540205233/product/186710.jpg";
                 DB.GetCollectionDBModel<Product>().Insert(product);
 
@@ -149,6 +150,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product1.IsActive = true;
                 product1.SizeID = 2;
                 product1.ColorID = 1;
+                product1.Gender = 1;
                 product1.imageSrc = "https://a3655836d5c58a086ac2-4e8d43a89f100386d472e9f1a1dc59ca.ssl.cf3.rackcdn.com/images/original/dbf68972-c4aa-447b-9726-c11fd209cc7d.jpg";
                 DB.GetCollectionDBModel<Product>().Insert(product1);
 
@@ -162,6 +164,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product2.IsActive = true;
                 product2.SizeID = 3;
                 product2.ColorID = 1;
+                product2.Gender = 1;
                 product2.imageSrc = "https://cdn.shopify.com/s/files/1/1832/4455/products/1153_S17_IconShirt_MendocinoBlue_FR.jpg?v=1572027022";
                 DB.GetCollectionDBModel<Product>().Insert(product2);
                 #endregion
@@ -177,6 +180,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product3.IsActive = true;
                 product3.SizeID = 4;
                 product3.ColorID = 1;
+                product3.Gender = 1;
                 product3.imageSrc = "https://cdn11.bigcommerce.com/s-rxzabllq/images/stencil/1280x1280/products/910/18045/Kids-Plain-Poly-Fit-Quick_Dry-Tshirt-red__13799.1567089094.jpg?c=2";
                 DB.GetCollectionDBModel<Product>().Insert(product3);
 
@@ -190,6 +194,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product4.IsActive = true;
                 product4.SizeID = 1;
                 product4.ColorID = 1;
+                product4.Gender = 1;
                 product4.imageSrc = "https://d2h2vnfmmg5sct.cloudfront.net/catalog/product/large_image/02_414443.jpg";
                 DB.GetCollectionDBModel<Product>().Insert(product4);
 
@@ -203,6 +208,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product5.IsActive = true;
                 product5.SizeID = 2;
                 product5.ColorID = 1;
+                product5.Gender = 1;
                 product5.imageSrc = "https://images-na.ssl-images-amazon.com/images/I/61mSyjeYXWL._AC_UX679_.jpg";
                 DB.GetCollectionDBModel<Product>().Insert(product5);
                 #endregion
@@ -218,6 +224,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product6.IsActive = true;
                 product6.SizeID = 3;
                 product6.ColorID = 1;
+                product6.Gender = 1;
                 product6.imageSrc = "https://product.hstatic.net/1000306633/product/5bc67f9a-f1db-4405-9583-9ebc476078b5_4335d664706d4ec0a53e337da90c06a3_master.jpg";
                 DB.GetCollectionDBModel<Product>().Insert(product6);
 
@@ -231,6 +238,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product7.IsActive = true;
                 product7.SizeID = 4;
                 product7.ColorID = 1;
+                product7.Gender = 1;
                 product7.imageSrc = "https://cdni.llbean.net/is/image/wim/507067_0_46?hei=1095&wid=950&resMode=sharp2&defaultImage=llbstage/A0211793_2";
                 DB.GetCollectionDBModel<Product>().Insert(product7);
 
@@ -244,6 +252,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product8.IsActive = true;
                 product8.SizeID = 2;
                 product8.ColorID = 1;
+                product8.Gender = 1;
                 product8.imageSrc = "https://cf.shopee.ph/file/70f66a937abf9230417e1700379ca3ee";
                 DB.GetCollectionDBModel<Product>().Insert(product8);
                 #endregion
@@ -259,6 +268,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product9.IsActive = true;
                 product9.SizeID = 3;
                 product9.ColorID = 1;
+                product9.Gender = 1;
                 product9.imageSrc = "https://i1.wp.com/ae01.alicdn.com/kf/HTB1U7edb9WD3KVjSZSgq6ACxVXaN/2019-New-autumn-Men-s-cotton-Jeans-men-Business-Casual-Stretch-Jean-Classic-Trousers-Denim-Blue.jpg?fit=800%2C800&ssl=1";
                 DB.GetCollectionDBModel<Product>().Insert(product9);
 
@@ -272,6 +282,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product10.IsActive = true;
                 product10.SizeID = 4;
                 product10.ColorID = 1;
+                product10.Gender = 1;
                 product10.imageSrc = "https://cdn.mudjeans.eu/wp-content/uploads/2018/04/Man-Ethical-Jeans-Regular-Dunn-Stone-Blue-halffront-1.jpg";
                 DB.GetCollectionDBModel<Product>().Insert(product10);
 
@@ -285,6 +296,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product11.IsActive = true;
                 product11.SizeID = 1;
                 product11.ColorID = 1;
+                product11.Gender = 1;
                 product11.imageSrc = "https://www1.assets-gap.com/webcontent/0015/058/596/cn15058596.jpg";
                 DB.GetCollectionDBModel<Product>().Insert(product11);
                 #endregion
@@ -300,6 +312,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product12.IsActive = true;
                 product12.SizeID = 2;
                 product12.ColorID = 1;
+                product12.Gender = 1;
                 product12.imageSrc = "https://cdn.shopify.com/s/files/1/0071/5633/4681/products/Men_Original-Mountain-Pant_Relaxed-Fit_Terra_272_grande.jpg?v=1568320083";
                 DB.GetCollectionDBModel<Product>().Insert(product12);
 
@@ -313,6 +326,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product13.IsActive = true;
                 product13.SizeID = 3;
                 product13.ColorID = 1;
+                product13.Gender = 1;
                 product13.imageSrc = "https://cdn.shopify.com/s/files/1/0023/9901/0881/products/M-Coburn-Pant-Storm-Cloud_5f952c4f-d899-484f-b891-acf4f37f6269_1400x1400.jpg?v=1582657066";
                 DB.GetCollectionDBModel<Product>().Insert(product13);
 
@@ -326,6 +340,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product14.IsActive = true;
                 product14.SizeID = 4;
                 product14.ColorID = 1;
+                product14.Gender = 1;
                 product14.imageSrc = "https://images.puma.net/images/596699/32/fnd/AUS/w/1000/h/1000/bg/255,255,255";
                 DB.GetCollectionDBModel<Product>().Insert(product14);
                 #endregion

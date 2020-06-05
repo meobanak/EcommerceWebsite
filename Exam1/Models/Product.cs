@@ -15,6 +15,7 @@ namespace Exam1.Models
         public double Price { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
+        public int Gender { get; set; }
         public int SizeID { get; set; }
         public string imageSrc { get; set; }
     }
