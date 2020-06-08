@@ -1,4 +1,5 @@
-﻿using EcommerceWebsite.Service.Interface;
+﻿using EcommerceWebsite.Extensions;
+using EcommerceWebsite.Service.Interface;
 using Exam1.Extensions;
 using Exam1.Models;
 using Exam1.Service.LiteDB;
@@ -39,7 +40,7 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
             return DB.GetCollectionDBModel<User>().FindAll().ToList();
         }
 
-        public IEnumerable<object> ListProduct()
+        public IEnumerable<dynamic> ListProduct()
         {
             List<Product> products = DB.GetCollectionDBModel<Product>().FindAll().ToList();
             List<Category> categories = DB.GetCollectionDBModel<Category>().FindAll().ToList();
@@ -56,7 +57,7 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
                             Price = product.Price,
                             Size = size.Name,
                             Gender = product.Gender == 1 ? "Male" : "Female"
-                        };
+                        }.ToExpando();
 
             return query;
         }

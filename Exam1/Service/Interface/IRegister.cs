@@ -12,6 +12,6 @@ namespace EcommerceWebsite.Service.Interface
         bool Update(User model);
         User GetUser(int ID);
         List<User> ListUser();
-        IEnumerable<object> ListProduct();
+        IEnumerable<dynamic> ListProduct();
     }
 }

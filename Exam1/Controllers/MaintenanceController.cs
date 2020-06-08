@@ -14,13 +14,11 @@ namespace EcommerceWebsite.Controllers
         public MaintenanceController(IRegister service)
         {
             iregister = service;
-            GetList();
         }
 
-        public IActionResult GetList()
+        public IActionResult Index()
         {
-            var listproduct = iregister.ListProduct();
-            return View(listproduct);
+            return View();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product>
+﻿@model IEnumerable<dynamic>
 @{
     ViewData["Title"] = "Maintainance";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,18 +15,23 @@
             <th scope="col">Price</th>
             <th scope="col">Size</th>
             <th scope="col">Gender</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var product in ViewBag.Products)
+        @foreach (var product in Model)
         {
         <tr>
             <td>@product.ID</td>
             <td>@product.CategoryName</td>
-            <td>@product.Name</td>
+            <td>@product.ProductName</td>
             <td>@product.Price</td>
             <td>@product.Size</td>
             <td>@product.Gender</td>
+            <td>
+                <a asp-controller="Maintenance" asp-action="Edit" asp-route-id="@product.ID">Edit</a> |
+                <a asp-controller="Maintenance" asp-action="Delete" asp-route-id="@product.ID">Delete</a>
+            </td>
         </tr>
         }
     </tbody>

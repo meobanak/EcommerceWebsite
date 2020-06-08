@@ -31,7 +31,7 @@ namespace Exam1.Controllers
         {
             var result = service.Get(ID);
             ViewBag.FSize = service.CategoryList();
-            return View(result);
+            return View("~/Views/Home/Detail.cshtml", result);
         }
         [HttpPost]
         public IActionResult Insert(Product ID)

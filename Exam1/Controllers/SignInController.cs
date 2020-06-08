@@ -22,15 +22,15 @@ namespace EcommerceWebsite.Controllers
         public IActionResult Login([Bind("ID,Email,FirstName,LastName,Password")] User model)
         {
             List<User> users = iregister.ListUser();
-            string rs = "";
+            IEnumerable<dynamic> products = iregister.ListProduct();
             foreach(User user in users)
             {
                 if (user.Email == model.Email && user.Password == model.Password)
                 {
-                    return View("~/Views/Admin/Maintenance.cshtml");
+                    return View("~/Views/Admin/Maintenance.cshtml", products);
                 }
             }
-            return Content("Wrong email or password");
+            return View(null);
         }
     }
 }
