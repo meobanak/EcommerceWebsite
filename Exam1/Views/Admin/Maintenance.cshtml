@@ -1,4 +1,6 @@
-﻿@model IEnumerable<dynamic>
+﻿@using Newtonsoft.Json;
+
+@model IEnumerable<dynamic>
 @{
     ViewData["Title"] = "Maintainance";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,6 +23,16 @@
     <tbody>
         @foreach (var product in Model)
         {
+            var result = new Dictionary<string, object>();
+            var dictionary = product as IDictionary<string, object>;
+            foreach (var item in dictionary)
+            {
+                result.Add(item.Key, item.Value);
+            }
+
+            var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+
             <tr>
                 <td>@product.ID</td>
                 <td>@product.CategoryName</td>
@@ -29,8 +41,8 @@
                 <td>@product.Size</td>
                 <td>@product.Gender</td>
                 <td>
-                    <button id="row-edit-@product.ID" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-edit" onclick="GetIDFromGrid('@product.ID')"> Edit </button> |
-                    <a id="row-delete-@product.ID" class="edit" data-toggle="modal" data-target="#confirm-delete" onclick="GetIDFromGrid('@product.ID')">Delete</a>
+                    <button id="row-edit-@product.ID" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-edit" onclick="GetIDFromGrid(@json)"> Edit </button> |
+                    <a id="row-delete-@product.ID" class="edit" data-toggle="modal" data-target="#confirm-delete" onclick="GetIDFromGrid(@json)">Delete</a>
                 </td>
             </tr>
         }
@@ -105,10 +117,10 @@
                     <div class="row">
                         <div class="col-sm">Gender:</div>
                         <div class="col-md">
-                                <select id="cmbGender" >
-                                    <option value="0">Female</option>
-                                    <option value="1">Male</option>
-                                </select>
+                            <select id="cmbGender">
+                                <option value="0">Female</option>
+                                <option value="1">Male</option>
+                            </select>
                         </div>
                     </div>
 
@@ -123,25 +135,29 @@
 </div>
 
 <script type="text/javascript">
+
     var product;
-    var productID;
+
     function GetIDFromGrid(row) {
-        <@*text>
-             @foreach (var product in Model)
-             {
-                 if(product.ID = row)
-             }
-        </text>*@
+        product = JSON.parse(JSON.stringify(row));
     }
 
     $(document.getElementById('confirm-delete')).on('shown.bs.modal', function (e) {
-        var btnDelOK = document.getElementById('btnDelOK');
-        btnDelOK.setAttribute('data-id', productID);
+       var btnDelOK = document.getElementById('btnDelOK');
+        btnDelOK.setAttribute('data-id', product.ID);
+        
     });
 
     $(document.getElementById('confirm-edit')).on('shown.bs.modal', function (e) {
+        var txtProductName = document.getElementById('txtProductName');
+        var cmbCategory = document.getElementById('cmbCategory');
+        var cmbSize = document.getElementById('cmbSize');
+        var cmbGender = document.getElementById('cmbGender');
         var btnEditOK = document.getElementById('btnEditOK');
-        btnEditOK.setAttribute('data-id', productID);
+        btnEditOK.setAttribute('data-id', product.ID);
+        txtProductName.setAttribute('value', product.ProductName);
+        cmbCategory.setAttribute('asp-for', product.CategoryName);
+       
     });
 
 </script>

@@ -7,6 +7,7 @@ using EcommerceWebsite.Service.Interface;
 using Exam1.Service.LiteDB;
 using Exam1.Models;
 
+
 namespace EcommerceWebsite.Controllers
 {
     public class SignInController : Controller
@@ -26,6 +27,7 @@ namespace EcommerceWebsite.Controllers
             IEnumerable<dynamic> products = iregister.ListProduct();
             ViewBag.Categories = iregister.CategoriesList();
             ViewBag.Size = iregister.SizeList();
+
             foreach (User user in users)
             {
                 if (user.Email == model.Email && user.Password == model.Password)

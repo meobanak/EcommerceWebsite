@@ -59,11 +59,6 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
                             Gender = product.Gender == 1 ? "Male" : "Female"
                         }.ToExpando();
 
-
-            //var serializer = new JavaScriptSerializer();
-            //serializer.RegisterConverters(new JavaScriptConverter[] { new ExpandoJSONConverter() });
-            //var json = serializer.Serialize(obj);
-
             return query;
         }
 
