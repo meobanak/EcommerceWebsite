@@ -21,9 +21,14 @@ namespace Exam1.Service.LiteDB.EcomerceFashionService
             init.InitDB();
         }
 
-        public List<FSize> CategoryList()
+        public List<FSize> SizeList()
         {
             return DB.GetCollectionDBModel<FSize>().FindAll().ToList();
+        }
+
+        public List<Category> CategoriesList()
+        {
+            return DB.GetCollectionDBModel<Category>().FindAll().ToList();
         }
 
         public Product Get(int ID)

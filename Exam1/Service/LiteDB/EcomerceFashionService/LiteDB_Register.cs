@@ -59,7 +59,24 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
                             Gender = product.Gender == 1 ? "Male" : "Female"
                         }.ToExpando();
 
+
+            //var serializer = new JavaScriptSerializer();
+            //serializer.RegisterConverters(new JavaScriptConverter[] { new ExpandoJSONConverter() });
+            //var json = serializer.Serialize(obj);
+
             return query;
         }
+
+
+        public List<FSize> SizeList()
+        {
+            return DB.GetCollectionDBModel<FSize>().FindAll().ToList();
+        }
+
+        public List<Category> CategoriesList()
+        {
+            return DB.GetCollectionDBModel<Category>().FindAll().ToList();
+        }
     }
+
 }

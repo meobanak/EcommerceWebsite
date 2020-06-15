@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Maintainance</h1>
+<h1>Maintenance</h1>
 
 <table class="table">
     <thead class="thead-dark">
@@ -21,20 +21,129 @@
     <tbody>
         @foreach (var product in Model)
         {
-        <tr>
-            <td>@product.ID</td>
-            <td>@product.CategoryName</td>
-            <td>@product.ProductName</td>
-            <td>@product.Price</td>
-            <td>@product.Size</td>
-            <td>@product.Gender</td>
-            <td>
-                <a asp-controller="Maintenance" asp-action="Edit" asp-route-id="@product.ID">Edit</a> |
-                <a asp-controller="Maintenance" asp-action="Delete" asp-route-id="@product.ID">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>@product.ID</td>
+                <td>@product.CategoryName</td>
+                <td>@product.ProductName</td>
+                <td>@product.Price</td>
+                <td>@product.Size</td>
+                <td>@product.Gender</td>
+                <td>
+                    <button id="row-edit-@product.ID" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-edit" onclick="GetIDFromGrid('@product.ID')"> Edit </button> |
+                    <a id="row-delete-@product.ID" class="edit" data-toggle="modal" data-target="#confirm-delete" onclick="GetIDFromGrid('@product.ID')">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data_parameter="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure want to delete </p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelCancel" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button id="btnDelOK" type="button" class="btn btn-primary" asp-controller="Maintenance" asp-action="Delete" asp-route-id="">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="confirm-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data_parameter="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">Product Name:</div>
+                        <div class="col-sm">
+                            <input id="txtProductName" type="text" value="" />
+                        </div>
+                        <div class="col-sm">Category:</div>
+                        <div class="col-md">
+                            <select id="cmbCategory">
+                                @foreach (Category cate in ViewBag.Categories)
+                                {
+                                    <option value="@cate.ID">@cate.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">Price: </div>
+                        <div class="col-sm">
+                            <input type="text" value="" />
+                        </div>
+                        <div class="col-sm">Size:</div>
+                        <div class="col-md">
+                            <select id="cmbSize">
+                                @foreach (FSize size in ViewBag.Size)
+                                {
+                                    <option value="@size.ID">@size.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">Gender:</div>
+                        <div class="col-md">
+                                <select id="cmbGender" >
+                                    <option value="0">Female</option>
+                                    <option value="1">Male</option>
+                                </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnEditCancel" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button id="btnEditOK" type="button" class="btn btn-primary" asp-controller="Maintenance" asp-action="Edit" asp-route-id="">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var product;
+    var productID;
+    function GetIDFromGrid(row) {
+        <@*text>
+             @foreach (var product in Model)
+             {
+                 if(product.ID = row)
+             }
+        </text>*@
+    }
+
+    $(document.getElementById('confirm-delete')).on('shown.bs.modal', function (e) {
+        var btnDelOK = document.getElementById('btnDelOK');
+        btnDelOK.setAttribute('data-id', productID);
+    });
+
+    $(document.getElementById('confirm-edit')).on('shown.bs.modal', function (e) {
+        var btnEditOK = document.getElementById('btnEditOK');
+        btnEditOK.setAttribute('data-id', productID);
+    });
+
+</script>
 
 

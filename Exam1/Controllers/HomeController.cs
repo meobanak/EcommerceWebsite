@@ -30,7 +30,7 @@ namespace Exam1.Controllers
         public IActionResult Detail(int ID)
         {
             var result = service.Get(ID);
-            ViewBag.FSize = service.CategoryList();
+            ViewBag.FSize = service.SizeList();
             return View("~/Views/Home/Detail.cshtml", result);
         }
         [HttpPost]

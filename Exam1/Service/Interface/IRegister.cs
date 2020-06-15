@@ -13,5 +13,7 @@ namespace EcommerceWebsite.Service.Interface
         User GetUser(int ID);
         List<User> ListUser();
         IEnumerable<dynamic> ListProduct();
+        List<FSize> SizeList();
+        List<Category> CategoriesList();
     }
 }

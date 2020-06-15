@@ -12,6 +12,7 @@ namespace EcommerceWebsite.Controllers
     public class SignInController : Controller
     {
         private IRegister iregister;
+        
 
         public SignInController(IRegister service)
         {
@@ -23,7 +24,9 @@ namespace EcommerceWebsite.Controllers
         {
             List<User> users = iregister.ListUser();
             IEnumerable<dynamic> products = iregister.ListProduct();
-            foreach(User user in users)
+            ViewBag.Categories = iregister.CategoriesList();
+            ViewBag.Size = iregister.SizeList();
+            foreach (User user in users)
             {
                 if (user.Email == model.Email && user.Password == model.Password)
                 {

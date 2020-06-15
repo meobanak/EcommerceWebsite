@@ -20,5 +20,12 @@ namespace EcommerceWebsite.Controllers
         {
             return View();
         }
+
+
+
+        public IActionResult Delete()
+        {
+            return View();
+        }
     }
 }
