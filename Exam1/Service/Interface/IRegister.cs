@@ -15,5 +15,7 @@ namespace EcommerceWebsite.Service.Interface
         IEnumerable<dynamic> ListProduct();
         List<FSize> SizeList();
         List<Category> CategoriesList();
+        bool Insert(Product product);
+        bool Update(Product product);
     }
 }

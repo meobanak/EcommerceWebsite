@@ -41,16 +41,6 @@ namespace Exam1.Service.LiteDB.EcomerceFashionService
             return DB.GetCollectionDBModel<Product>().FindAll().ToList();
         }
 
-        public bool Insert(Product product)
-        {
-            return DB.GetCollectionDBModel<Product>().Insert(product);
-        }
-
-        public bool Update(Product product)
-        {
-            return DB.GetCollectionDBModel<Product>().Update(product);
-        }
-
         public int Delete(int ID)
         {
             return DB.GetCollectionDBModel<Product>().DeleteMany(a => a.ID == ID);

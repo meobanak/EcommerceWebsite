@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EcommerceWebsite.Service.Interface;
+using Exam1.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceWebsite.Controllers
@@ -21,6 +22,13 @@ namespace EcommerceWebsite.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Edit( string ob)
+        {
+
+            //iregister.Update(product);
+            return View();
+        }
 
 
         public IActionResult Delete()

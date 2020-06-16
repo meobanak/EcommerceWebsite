@@ -53,9 +53,11 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
                         {
                             ID = product.ID,
                             CategoryName = category.Name,
+                            CategoryID = category.ID,
                             ProductName = product.Name,
                             Price = product.Price,
                             Size = size.Name,
+                            SizeID = size.ID,
                             Gender = product.Gender == 1 ? "Male" : "Female"
                         }.ToExpando();
 
@@ -71,6 +73,16 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
         public List<Category> CategoriesList()
         {
             return DB.GetCollectionDBModel<Category>().FindAll().ToList();
+        }
+
+        public bool Insert(Product product)
+        {
+            return DB.GetCollectionDBModel<Product>().Insert(product);
+        }
+
+        public bool Update(Product product)
+        {
+            return DB.GetCollectionDBModel<Product>().Update(product);
         }
     }
 

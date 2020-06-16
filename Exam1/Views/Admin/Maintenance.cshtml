@@ -42,7 +42,7 @@
                 <td>@product.Gender</td>
                 <td>
                     <button id="row-edit-@product.ID" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-edit" onclick="GetIDFromGrid(@json)"> Edit </button> |
-                    <a id="row-delete-@product.ID" class="edit" data-toggle="modal" data-target="#confirm-delete" onclick="GetIDFromGrid(@json)">Delete</a>
+                    <button id="row-delete-@product.ID" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-delete" onclick="GetIDFromGrid(@json)">Delete</button>
                 </td>
             </tr>
         }
@@ -60,7 +60,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure want to delete </p>
+                <p>Are you sure you want to delete </p>
             </div>
             <div class="modal-footer">
                 <button id="btnDelCancel" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -75,7 +75,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Warning</h5>
+                <h5 class="modal-title">Detail</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -101,7 +101,7 @@
                     <div class="row">
                         <div class="col-sm">Price: </div>
                         <div class="col-sm">
-                            <input type="text" value="" />
+                            <input id="txtPrice" type="text" value="" />
                         </div>
                         <div class="col-sm">Size:</div>
                         <div class="col-md">
@@ -128,7 +128,7 @@
             </div>
             <div class="modal-footer">
                 <button id="btnEditCancel" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button id="btnEditOK" type="button" class="btn btn-primary" asp-controller="Maintenance" asp-action="Edit" asp-route-id="">Yes</button>
+                <button id="btnEditOK" type="button" class="btn btn-primary" onclick="UpdateProduct()">Yes</button>
             </div>
         </div>
     </div>
@@ -137,15 +137,16 @@
 <script type="text/javascript">
 
     var product;
+    var sproduct;
 
     function GetIDFromGrid(row) {
+        sproduct = JSON.stringify(row)
         product = JSON.parse(JSON.stringify(row));
     }
 
     $(document.getElementById('confirm-delete')).on('shown.bs.modal', function (e) {
        var btnDelOK = document.getElementById('btnDelOK');
         btnDelOK.setAttribute('data-id', product.ID);
-        
     });
 
     $(document.getElementById('confirm-edit')).on('shown.bs.modal', function (e) {
@@ -154,11 +155,30 @@
         var cmbSize = document.getElementById('cmbSize');
         var cmbGender = document.getElementById('cmbGender');
         var btnEditOK = document.getElementById('btnEditOK');
+        var txtPrice = document.getElementById('txtPrice');
         btnEditOK.setAttribute('data-id', product.ID);
         txtProductName.setAttribute('value', product.ProductName);
-        cmbCategory.setAttribute('asp-for', product.CategoryName);
-       
+        txtPrice.setAttribute('value', product.Price);
+        cmbCategory.value = product.CategoryID;
+        cmbSize.value = product.SizeID;
+        cmbGender.value = product.Gender == 'Female' ? 0 : 1;
     });
+
+    function UpdateProduct() {
+    $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '@Url.Action("Edit", "Maintenance")',
+            data: sproduct,
+            contentType: 'application/json; charset=utf-8',
+            success: function (sproduct) {
+                alert('success');
+
+            
+          }
+     });
+    }
+
 
 </script>
 

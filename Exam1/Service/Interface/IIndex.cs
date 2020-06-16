@@ -12,8 +12,7 @@ namespace Exam1.Service.Interface
         List<Product> List();
         Product Get(int ID);
         List<FSize> SizeList();
-        bool Insert(Product motobike);
-        bool Update(Product motobike);
+       
         int Delete(int ID);
     }
 }

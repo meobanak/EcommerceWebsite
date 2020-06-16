@@ -33,12 +33,6 @@ namespace Exam1.Controllers
             ViewBag.FSize = service.SizeList();
             return View("~/Views/Home/Detail.cshtml", result);
         }
-        [HttpPost]
-        public IActionResult Insert(Product ID)
-        {
-            var result = service.Insert(ID);
-            return View(result);
-        }
 
         public IActionResult Privacy()
         {
