@@ -19,16 +19,33 @@ namespace EcommerceWebsite.Extensions
             return (ExpandoObject)expando;
         }
 
-        public static Dictionary<string,string> JsonObjectToDictionary(this object anomymousObject)
+        public static Dictionary<string,object> JsonObjectToDictionary(this object anomymousObject)
         {
             JObject jsonObject = JObject.Parse(anomymousObject.ToString());
             IEnumerable<JToken> jTokens = jsonObject.Descendants().Where(p => p.Count() == 0);
-            Dictionary<string, string> results = jTokens.Aggregate(new Dictionary<string, string>(), (properties, jToken) =>
+            Dictionary<string, object> results = jTokens.Aggregate(new Dictionary<string, object>(), (properties, jToken) =>
             {
                 properties.Add(jToken.Path, jToken.ToString());
                 return properties;
             });
             return results;
         }
+
+        public static T ToObject<T>(this IDictionary<string, object> source)
+        where T : class, new()
+        {
+            var someObject = new T();
+            var someObjectType = someObject.GetType();
+
+            foreach (var item in source)
+            {
+                someObjectType
+                         .GetProperty(item.Key)
+                         .SetValue(someObject, item.Value, null);
+            }
+
+            return someObject;
+        }
+
     }
 }

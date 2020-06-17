@@ -80,9 +80,11 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
             return DB.GetCollectionDBModel<Product>().Insert(product);
         }
 
-        public bool Update(Product product)
+        public bool Update(Dictionary<string,object> product)
         {
-            return DB.GetCollectionDBModel<Product>().Update(product);
+            Product result = product.ToObject<Product>();
+
+            return DB.GetCollectionDBModel<Product>().Update(result);
         }
     }
 

@@ -173,13 +173,12 @@
         data['Code'] = product.Code;
         data['CategoryID'] = cmbCategory.value;
         data['ColorID'] = product.ColorID;
-        data.Name = txtProductName.value;
-        data.Price = txtPrice.value;
-        data.Description = 'abc';
-        data.IsActive = true;
-        data.Gender = cmbGender.value;
-        data.SizeID = cmbSize.value;
-        data.imageSrc = txtPrice.value;
+        data['Name'] = txtProductName.value;
+        data['Price'] = txtPrice.value;
+        data['Description'] = 'abc';
+        data['IsActive'] = true;
+        data['Gender'] = cmbGender.value;
+        data['SizeID'] = cmbSize.value;
 
     $.ajax({
             type: "Post",

@@ -16,6 +16,6 @@ namespace EcommerceWebsite.Service.Interface
         List<FSize> SizeList();
         List<Category> CategoriesList();
         bool Insert(Product product);
-        bool Update(Product product);
+        bool Update(Dictionary<string,object> product);
     }
 }

@@ -29,6 +29,7 @@ namespace EcommerceWebsite.Controllers
         public IActionResult Edit([FromBody]object product)
         {
             var result = product.JsonObjectToDictionary();
+            iregister.Update(result);
             return Json(product);
         }
 
