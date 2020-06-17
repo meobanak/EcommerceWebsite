@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using EcommerceWebsite.Extensions;
 using EcommerceWebsite.Service.Interface;
 using Exam1.Models;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace EcommerceWebsite.Controllers
 {
@@ -22,12 +25,11 @@ namespace EcommerceWebsite.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Edit( string ob)
+        [HttpPost]
+        public IActionResult Edit([FromBody]object product)
         {
-
-            //iregister.Update(product);
-            return View();
+            var result = product.JsonObjectToDictionary();
+            return Json(product);
         }
 
 

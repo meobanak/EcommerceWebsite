@@ -136,8 +136,16 @@
 
 <script type="text/javascript">
 
-    var product;
     var sproduct;
+    var product;
+
+    var txtProductName = document.getElementById('txtProductName');
+    var cmbCategory = document.getElementById('cmbCategory');
+    var cmbSize = document.getElementById('cmbSize');
+    var cmbGender = document.getElementById('cmbGender');
+    var btnEditOK = document.getElementById('btnEditOK');
+    var txtPrice = document.getElementById('txtPrice');
+    var btnDelOK = document.getElementById('btnDelOK');
 
     function GetIDFromGrid(row) {
         sproduct = JSON.stringify(row)
@@ -145,17 +153,10 @@
     }
 
     $(document.getElementById('confirm-delete')).on('shown.bs.modal', function (e) {
-       var btnDelOK = document.getElementById('btnDelOK');
         btnDelOK.setAttribute('data-id', product.ID);
     });
 
     $(document.getElementById('confirm-edit')).on('shown.bs.modal', function (e) {
-        var txtProductName = document.getElementById('txtProductName');
-        var cmbCategory = document.getElementById('cmbCategory');
-        var cmbSize = document.getElementById('cmbSize');
-        var cmbGender = document.getElementById('cmbGender');
-        var btnEditOK = document.getElementById('btnEditOK');
-        var txtPrice = document.getElementById('txtPrice');
         btnEditOK.setAttribute('data-id', product.ID);
         txtProductName.setAttribute('value', product.ProductName);
         txtPrice.setAttribute('value', product.Price);
@@ -164,19 +165,33 @@
         cmbGender.value = product.Gender == 'Female' ? 0 : 1;
     });
 
-    function UpdateProduct() {
-    $.ajax({
-            type: 'GET',
-            dataType: 'json',
-            url: '@Url.Action("Edit", "Maintenance")',
-            data: sproduct,
-            contentType: 'application/json; charset=utf-8',
-            success: function (sproduct) {
-                alert('success');
 
-            
-          }
-     });
+    function UpdateProduct() {
+        console.log('Submitting form...');
+        var data = {};
+        data['ID'] = product.ID;
+        data['Code'] = product.Code;
+        data['CategoryID'] = cmbCategory.value;
+        data['ColorID'] = product.ColorID;
+        data.Name = txtProductName.value;
+        data.Price = txtPrice.value;
+        data.Description = 'abc';
+        data.IsActive = true;
+        data.Gender = cmbGender.value;
+        data.SizeID = cmbSize.value;
+        data.imageSrc = txtPrice.value;
+
+    $.ajax({
+            type: "Post",
+            url: '/Maintenance/Edit',
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+            console.log('Data received: ');
+            console.log(result);
+    }
+    });
     }
 
 
