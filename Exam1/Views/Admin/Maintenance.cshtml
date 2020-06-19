@@ -1,8 +1,10 @@
 ﻿@using Newtonsoft.Json;
 
+
 @model IEnumerable<dynamic>
+
 @{
-    ViewData["Title"] = "Maintainance";
+    ViewData["Title"] = "Maintenance";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -41,8 +43,8 @@
                 <td>@product.Size</td>
                 <td>@product.Gender</td>
                 <td>
-                    <button id="row-edit-@product.ID" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-edit" onclick="GetIDFromGrid(@json)"> Edit </button> |
-                    <button id="row-delete-@product.ID" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-delete" onclick="GetIDFromGrid(@json)">Delete</button>
+                    <button id="row-edit-@product.ID" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-edit" onclick="GetIDFromGrid('@product.ID')"> Edit </button> |
+                    <button id="row-delete-@product.ID" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-delete" onclick="GetIDFromGrid('@product.ID')">Delete</button>
                 </td>
             </tr>
         }
@@ -72,7 +74,7 @@
 
 
 <div class="modal fade" id="confirm-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data_parameter="">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Detail</h5>
@@ -80,32 +82,37 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm">Product Name:</div>
-                        <div class="col-sm">
-                            <input id="txtProductName" type="text" value="" />
+                <div class="container-fluid">
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="col-form-label">Product Name:</label>
+                            <input id="txtProductName" type="text" class="form-control">
                         </div>
-                        <div class="col-sm">Category:</div>
-                        <div class="col-md">
-                            <select id="cmbCategory">
-                                @foreach (Category cate in ViewBag.Categories)
-                                {
-                                    <option value="@cate.ID">@cate.Name</option>
-                                }
-                            </select>
+                        <div class="form-group">
+                            <label class="col-form-label">Category:</label>
+                            <div class="col-xs-6 col-sm-4">
+                                <select class="form-control" id="cmbCategory">
+                                    @foreach (Category cate in ViewBag.Categories)
+                                    {
+                                        <option value="@cate.ID">@cate.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            
                         </div>
-                    </div>
+                    </form>
+
 
                     <div class="row">
                         <div class="col-sm">Price: </div>
                         <div class="col-sm">
-                            <input id="txtPrice" type="text" value="" />
+                            <input id="txtPrice" type="text" class="form-control" value="" />
                         </div>
-                        <div class="col-sm">Size:</div>
+                        <div class="col-sm-auto">Size:</div>
                         <div class="col-md">
-                            <select id="cmbSize">
+                            <select class="form-control" id="cmbSize">
                                 @foreach (FSize size in ViewBag.Size)
                                 {
                                     <option value="@size.ID">@size.Name</option>
@@ -117,7 +124,7 @@
                     <div class="row">
                         <div class="col-sm">Gender:</div>
                         <div class="col-md">
-                            <select id="cmbGender">
+                            <select class="form-control" id="cmbGender">
                                 <option value="0">Female</option>
                                 <option value="1">Male</option>
                             </select>
@@ -147,9 +154,28 @@
     var txtPrice = document.getElementById('txtPrice');
     var btnDelOK = document.getElementById('btnDelOK');
 
-    function GetIDFromGrid(row) {
-        sproduct = JSON.stringify(row)
-        product = JSON.parse(JSON.stringify(row));
+    function GetIDFromGrid(productID) {
+        let data = {};
+        data['productID'] = productID
+        $.ajax({
+            type: "Post",
+            url: '/Maintenance/GetProduct',
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                product = result[0];
+            }
+        });
+    }
+
+    function BindingModelData() {
+        btnEditOK.setAttribute('data-id', product.ID);
+        txtProductName.setAttribute('value', product.ProductName);
+        txtPrice.setAttribute('value', product.Price);
+        cmbCategory.value = product.CategoryID;
+        cmbSize.value = product.SizeID;
+        cmbGender.value = product.Gender;
     }
 
     $(document.getElementById('confirm-delete')).on('shown.bs.modal', function (e) {
@@ -157,40 +183,33 @@
     });
 
     $(document.getElementById('confirm-edit')).on('shown.bs.modal', function (e) {
-        btnEditOK.setAttribute('data-id', product.ID);
-        txtProductName.setAttribute('value', product.ProductName);
-        txtPrice.setAttribute('value', product.Price);
-        cmbCategory.value = product.CategoryID;
-        cmbSize.value = product.SizeID;
-        cmbGender.value = product.Gender == 'Female' ? 0 : 1;
+        BindingModelData();
     });
+
 
 
     function UpdateProduct() {
         console.log('Submitting form...');
-        var data = {};
-        data['ID'] = product.ID;
-        data['Code'] = product.Code;
+        let data = {};
+        data = product;
         data['CategoryID'] = cmbCategory.value;
-        data['ColorID'] = product.ColorID;
         data['Name'] = txtProductName.value;
         data['Price'] = txtPrice.value;
-        data['Description'] = 'abc';
-        data['IsActive'] = true;
         data['Gender'] = cmbGender.value;
         data['SizeID'] = cmbSize.value;
 
-    $.ajax({
+        $.ajax({
             type: "Post",
             url: '/Maintenance/Edit',
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (result) {
-            console.log('Data received: ');
-            console.log(result);
-    }
-    });
+                console.log('Data received: ');
+                console.log(result);
+                location.reload();
+            }
+        });
     }
 
 

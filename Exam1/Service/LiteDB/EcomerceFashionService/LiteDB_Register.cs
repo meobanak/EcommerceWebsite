@@ -64,6 +64,37 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
             return query;
         }
 
+        public object GetProduct(object _product)
+        {
+            var ob = _product.JsonObjectToDictionary();
+            var productID = Convert.ToInt32(ob.FirstOrDefault(a => a.Key == "productID").Value);
+
+            List <Product> products = DB.GetCollectionDBModel<Product>().FindAll().ToList();
+            List<Category> categories = DB.GetCollectionDBModel<Category>().FindAll().ToList();
+            List<FSize> sizes = DB.GetCollectionDBModel<FSize>().FindAll().ToList();
+
+            var query = from product in products
+                        join category in categories on product.CategoryID equals category.ID
+                        join size in sizes on product.SizeID equals size.ID
+                        where product.ID == productID
+                        select new
+                        {
+                            ID = product.ID,
+                            Code = product.Code,
+                            CategoryID = product.CategoryID,
+                            Color = product.ColorID,
+                            ProductName = product.Name,
+                            Price = product.Price,
+                            Description = product.Description,
+                            IsActive = product.IsActive,
+                            Gender = product.Gender,
+                            SizeID = product.SizeID,
+                            imageSrc = product.imageSrc
+                        }.ToExpando();
+
+            return query;
+        }
+
 
         public List<FSize> SizeList()
         {
@@ -80,10 +111,9 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
             return DB.GetCollectionDBModel<Product>().Insert(product);
         }
 
-        public bool Update(Dictionary<string,object> product)
+        public bool Update(string productjson)
         {
-            Product result = product.ToObject<Product>();
-
+            Product result = Newtonsoft.Json.JsonConvert.DeserializeObject<Product>(productjson);
             return DB.GetCollectionDBModel<Product>().Update(result);
         }
     }

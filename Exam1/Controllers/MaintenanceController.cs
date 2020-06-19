@@ -26,10 +26,17 @@ namespace EcommerceWebsite.Controllers
         }
 
         [HttpPost]
+        public IActionResult GetProduct([FromBody]object product)
+        {
+            var jsonresult = iregister.GetProduct(product);
+            return Json(jsonresult);
+        }
+
+        [HttpPost]
         public IActionResult Edit([FromBody]object product)
         {
-            var result = product.JsonObjectToDictionary();
-            iregister.Update(result);
+            var _product = product.ToString();
+            iregister.Update(_product);
             return Json(product);
         }
 

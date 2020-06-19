@@ -13,9 +13,10 @@ namespace EcommerceWebsite.Service.Interface
         User GetUser(int ID);
         List<User> ListUser();
         IEnumerable<dynamic> ListProduct();
+        object GetProduct(object productjson);
         List<FSize> SizeList();
         List<Category> CategoriesList();
         bool Insert(Product product);
-        bool Update(Dictionary<string,object> product);
+        bool Update(string productjson);
     }
 }

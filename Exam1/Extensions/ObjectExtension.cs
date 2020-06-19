@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Extensions
@@ -31,20 +32,16 @@ namespace EcommerceWebsite.Extensions
             return results;
         }
 
-        public static T ToObject<T>(this IDictionary<string, object> source)
-        where T : class, new()
+        public static T DictionaryToObject<T>(this IDictionary<string, object> source)
         {
-            var someObject = new T();
-            var someObjectType = someObject.GetType();
+            Type type = typeof(T);
+            var obj = Activator.CreateInstance(type);
 
-            foreach (var item in source)
+            foreach (var kv in source)
             {
-                someObjectType
-                         .GetProperty(item.Key)
-                         .SetValue(someObject, item.Value, null);
+                type.GetProperty(kv.Key).SetValue(obj, kv.Value);
             }
-
-            return someObject;
+            return (T)obj;
         }
 
     }
