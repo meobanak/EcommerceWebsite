@@ -16,6 +16,7 @@ namespace EcommerceWebsite.Service.Interface
         object GetProduct(object productjson);
         List<FSize> SizeList();
         List<Category> CategoriesList();
+        List<FColor> ColorList();
         bool Insert(Product product);
         bool Update(string productjson);
     }

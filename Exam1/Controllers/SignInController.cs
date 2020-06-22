@@ -27,6 +27,7 @@ namespace EcommerceWebsite.Controllers
             IEnumerable<dynamic> products = iregister.ListProduct();
             ViewBag.Categories = iregister.CategoriesList();
             ViewBag.Size = iregister.SizeList();
+            ViewBag.Colors = iregister.ColorList();
 
             foreach (User user in users)
             {

@@ -8,7 +8,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Maintenance</h1>
 
 <table class="table">
     <thead class="thead-dark">
@@ -83,35 +82,51 @@
                 </button>
             </div>
 
+
             <div class="modal-body">
                 <div class="container-fluid">
                     <form class="form-inline" role="form">
                         <div class="form-group">
-                            <label class="col-form-label">Product Name:</label>
+                            <label class="col-form-label">Code </label>
+                            <input id="txtCode" type="text" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label">Color </label>
+                            <select id="cmbColor" class="form-control">
+                                @foreach (FColor color in ViewBag.Colors)
+                                {
+                                    <option value="@color.ID">@color.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </form>
+
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="col-form-label">Product Name </label>
                             <input id="txtProductName" type="text" class="form-control">
                         </div>
                         <div class="form-group">
                             <label class="col-form-label">Category:</label>
-                            <div class="col-xs-6 col-sm-4">
-                                <select class="form-control" id="cmbCategory">
-                                    @foreach (Category cate in ViewBag.Categories)
-                                    {
-                                        <option value="@cate.ID">@cate.Name</option>
-                                    }
-                                </select>
-                            </div>
-                            
+                            <select class="form-control" id="cmbCategory">
+                                @foreach (Category cate in ViewBag.Categories)
+                                {
+                                    <option value="@cate.ID">@cate.Name</option>
+                                }
+                            </select>
                         </div>
                     </form>
 
-
-                    <div class="row">
-                        <div class="col-sm">Price: </div>
-                        <div class="col-sm">
+                    <div class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="col-form-label">Price </label>
                             <input id="txtPrice" type="text" class="form-control" value="" />
                         </div>
-                        <div class="col-sm-auto">Size:</div>
-                        <div class="col-md">
+
+
+                        <div class="form-group">
+                            <label class="col-form-label">Size</label>
                             <select class="form-control" id="cmbSize">
                                 @foreach (FSize size in ViewBag.Size)
                                 {
@@ -119,25 +134,47 @@
                                 }
                             </select>
                         </div>
+
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm">Gender:</div>
-                        <div class="col-md">
+                    <div class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="col-form-label">Gender</label>
                             <select class="form-control" id="cmbGender">
                                 <option value="0">Female</option>
                                 <option value="1">Male</option>
                             </select>
+
+                            <div class="form-group">
+                                <label class="col-form-label">Active </label>
+                                <input id="chkIsActive" type="checkbox" class="form-control" value="false" />
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="col-form-label">Description </label>
+                            <input id="txtDescription" type="text" class="form-control-lg" value="" />
                         </div>
                     </div>
 
                 </div>
+
             </div>
+
+
             <div class="modal-footer">
                 <button id="btnEditCancel" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 <button id="btnEditOK" type="button" class="btn btn-primary" onclick="UpdateProduct()">Yes</button>
             </div>
+
         </div>
+
+        
+
     </div>
 </div>
 
@@ -153,20 +190,13 @@
     var btnEditOK = document.getElementById('btnEditOK');
     var txtPrice = document.getElementById('txtPrice');
     var btnDelOK = document.getElementById('btnDelOK');
+    var txtCode = document.getElementById('txtCode');
+    var txtDescription = document.getElementById('txtDescription');
 
     function GetIDFromGrid(productID) {
         let data = {};
-        data['productID'] = productID
-        $.ajax({
-            type: "Post",
-            url: '/Maintenance/GetProduct',
-            data: JSON.stringify(data),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (result) {
-                product = result[0];
-            }
-        });
+        data['productID'] = productID;
+        ExcuteJson(data, '/Maintenance/GetProduct', GetProductCallback);
     }
 
     function BindingModelData() {
@@ -176,6 +206,8 @@
         cmbCategory.value = product.CategoryID;
         cmbSize.value = product.SizeID;
         cmbGender.value = product.Gender;
+        txtCode.value = product.Code;
+        txtDescription.value = product.Description;
     }
 
     $(document.getElementById('confirm-delete')).on('shown.bs.modal', function (e) {
@@ -192,25 +224,37 @@
         console.log('Submitting form...');
         let data = {};
         data = product;
+        data['Code'] = txtCode.value;
         data['CategoryID'] = cmbCategory.value;
         data['Name'] = txtProductName.value;
         data['Price'] = txtPrice.value;
         data['Gender'] = cmbGender.value;
         data['SizeID'] = cmbSize.value;
+        data['Description'] = txtDescription.value;
+        ExcuteJson(data, '/Maintenance/Edit', null);
+        location.reload();
+    }
 
+    function GetProductCallback(returndata) {
+        product = returndata[0];
+    }
+
+    function ExcuteJson(data, stringUrl, Callback) {
         $.ajax({
             type: "Post",
-            url: '/Maintenance/Edit',
+            url: stringUrl,
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (result) {
                 console.log('Data received: ');
-                console.log(result);
-                location.reload();
+                if (Callback != null)
+                    Callback(result);
             }
+
         });
     }
+
 
 
 </script>

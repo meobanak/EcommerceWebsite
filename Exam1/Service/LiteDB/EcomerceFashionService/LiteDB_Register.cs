@@ -106,6 +106,11 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
             return DB.GetCollectionDBModel<Category>().FindAll().ToList();
         }
 
+        public List<FColor> ColorList()
+        {
+            return DB.GetCollectionDBModel<FColor>().FindAll().ToList();
+        }
+
         public bool Insert(Product product)
         {
             return DB.GetCollectionDBModel<Product>().Insert(product);
