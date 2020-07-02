@@ -14,5 +14,19 @@ namespace Exam1.Extensions
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        public static Type GetTypeByName(this string name)
+        {
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Reverse())
+            {
+                var tt = assembly.GetType(name);
+                if (tt != null)
+                {
+                    return tt;
+                }
+            }
+
+            return null;
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace Exam1
             services.AddMvc();
             #region Init LiteDB
             services.Configure<LiteDBOptions>(Configuration.GetSection("LiteDbOptions"));
-            services.AddSingleton<ILiteDBContext, LiteDBContext>();
+            services.AddSingleton<DataContext, LiteDBContext>();
             services.AddScoped<IDBInit, LiteDB_InitFashionShop>();
             services.AddScoped<IIndex, LiteDB_Index>();
             services.AddTransient<IRegister, LiteDB_Register>();

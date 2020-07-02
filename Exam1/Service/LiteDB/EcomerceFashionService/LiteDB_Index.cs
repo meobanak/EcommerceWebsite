@@ -15,7 +15,7 @@ namespace Exam1.Service.LiteDB.EcomerceFashionService
     {
         private LiteDatabase DB;
 
-        public LiteDB_Index(ILiteDBContext data, IDBInit init)
+        public LiteDB_Index(DataContext data, IDBInit init)
         {
             DB = data.Database;
             init.InitDB();

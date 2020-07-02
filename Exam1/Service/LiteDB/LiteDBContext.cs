@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Exam1.Service.LiteDB
 {
-    public class LiteDBContext : ILiteDBContext 
+    public class LiteDBContext : DataContext 
     {
         public LiteDatabase Database { get; set; }
 

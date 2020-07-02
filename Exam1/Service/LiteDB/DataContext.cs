@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Exam1.Service.LiteDB
 {
-    public interface ILiteDBContext
+    public interface DataContext
     {
         LiteDatabase Database { get; set; }
     }

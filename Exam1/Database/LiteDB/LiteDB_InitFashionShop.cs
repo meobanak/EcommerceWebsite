@@ -12,7 +12,7 @@ namespace EcommerceWebsite.Database.LiteDB
     public class LiteDB_InitFashionShop : IDBInit
     {
         private LiteDatabase DB;
-        public LiteDB_InitFashionShop(ILiteDBContext context)
+        public LiteDB_InitFashionShop(DataContext context)
         {
             DB = context.Database;
         }
