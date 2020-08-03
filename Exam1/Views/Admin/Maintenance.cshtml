@@ -85,107 +85,107 @@
 
             <div class="modal-body">
                 <div class="container-fluid">
-
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <input type="checkbox">
-                                </span>
-                                <input type="text" class="form-control">
+                        <div class="col-lg-6"  role="form">
+                            <div class="form-group">
+                                <label class="col-form-label">Code </label>
+                                <input id="txtCode" type="text" class="form-control" />
                             </div><!-- /input-group -->
                         </div><!-- /.col-lg-6 -->
                         <div class="col-lg-6">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <input type="radio">
-                                </span>
-                                <input type="text" class="form-control">
+                            <div class="form-group">
+                                <label class="col-form-label">Color </label>
+                                <select id="cmbColor" class="form-control">
+                                    @foreach (FColor color in ViewBag.Colors)
+                                    {
+                                        <option value="@color.ID">@color.Name</option>
+                                    }
+                                </select>
                             </div><!-- /input-group -->
                         </div><!-- /.col-lg-6 -->
                     </div><!-- /.row -->
 
-                    <form class="form-inline" role="form">
-                        <div class="form-group">
-                            <label class="col-form-label">Code </label>
-                            <input id="txtCode" type="text" class="form-control" />
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-form-label">Color </label>
-                            <select id="cmbColor" class="form-control">
-                                @foreach (FColor color in ViewBag.Colors)
-                                {
-                                    <option value="@color.ID">@color.Name</option>
-                                }
-                            </select>
-                        </div>
-                    </form>
 
                     <br />
 
-                    <form class="form-inline" role="form">
-                        <div class="form-group">
-                            <label class="col-form-label">Product Name </label>
-                            <input id="txtProductName" type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="col-form-label">Category:</label>
-                            <select class="form-control" id="cmbCategory">
-                                @foreach (Category cate in ViewBag.Categories)
-                                {
-                                    <option value="@cate.ID">@cate.Name</option>
-                                }
-                            </select>
-                        </div>
-                    </form>
 
-                    <br />
-
-                    <div class="form-inline" role="form">
-                        <div class="form-group">
-                            <label class="col-form-label">Price </label>
-                            <input id="txtPrice" type="text" class="form-control" value="" />
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-form-label">Size</label>
-                            <select class="form-control" id="cmbSize">
-                                @foreach (FSize size in ViewBag.Size)
-                                {
-                                    <option value="@size.ID">@size.Name</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="form-inline" role="form">
-                        <div class="form-group">
-                            <label class="col-form-label">Gender</label>
-                            <select class="form-control" id="cmbGender">
-                                <option value="0">Female</option>
-                                <option value="1">Male</option>
-                            </select>
-
+                    <div class="row">
+                        <div class="col-lg-6" role="form">
                             <div class="form-group">
-                                <label class="col-form-label">Active </label>
-                                <input id="chkIsActive" type="checkbox" class="form-control" value="false" />
+                                <label class="col-form-label">Product Name</label>
+                                <input id="txtProductName" type="text" class="form-control">
                             </div>
+                        </div>
+                        <div class="col-lg-6" role="form">
+                            <div class="form-group">
+                                <label class="col-form-label">Category </label>
+                                <select class="form-control" id="cmbCategory">
+                                    @foreach (Category cate in ViewBag.Categories)
+                                    {
+                                        <option value="@cate.ID">@cate.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
+
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-lg-6" role="form">
+                            <div class="form-group">
+                                <label class="col-form-label">Price </label>
+                                <input id="txtPrice" type="text" class="form-control" value="" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6" role="form">
+                            <div class="form-group">
+                                <label class="col-form-label">Size</label>
+                                <select class="form-control" id="cmbSize">
+                                    @foreach (FSize size in ViewBag.Size)
+                                    {
+                                        <option value="@size.ID">@size.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-lg-6" role="form">
+                            <div class="form-group">
+                                <label class="col-form-label">Gender</label>
+                                <select class="form-control" id="cmbGender">
+                                    <option value="0">Female</option>
+                                    <option value="1">Male</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-1" role="form">
+                            <div class="form-group">
+                                <label class="col-form-label">Active</label>
+                                <input id="chkIsActive" type="checkbox" class="form-control value="false" />
+                            </div>
                         </div>
                     </div>
 
                     <br />
 
-                    <div class="form-inline" role="form">
-                        <div class="form-group">
-                            <label class="col-form-label">Description </label>
-                            <input id="txtDescription" type="text" class="form-control-lg" value="" />
+                    <div class="row">
+                        <div class="col-lg-12" role="form">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Description</label>
+                                <textarea class="form-control" id="txtDescription" rows="5" ></textarea>
+                            </div>
                         </div>
                     </div>
+
 
                 </div>
 

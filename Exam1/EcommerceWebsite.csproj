@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Dashboard\**" />
+    <Content Remove="Views\Dashboard\**" />
+    <EmbeddedResource Remove="Views\Dashboard\**" />
+    <None Remove="Views\Dashboard\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Service\LiteDBContext.cs~RF5ad14599.TMP" />
   </ItemGroup>
 
@@ -38,10 +45,6 @@
     <None Include="wwwroot\js\simpleCart.min.js" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\js\wow.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Dashboard\" />
   </ItemGroup>
 
 
