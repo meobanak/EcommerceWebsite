@@ -13,11 +13,11 @@ namespace EcommerceWebsite.Controllers
 {
     public class MaintenanceController : Controller
     {
-        private IRegister iregister;
+        private ILiteDBDataProvider service;
 
-        public MaintenanceController(IRegister service)
+        public MaintenanceController(ILiteDBDataProvider _service)
         {
-            iregister = service;
+            service = _service;
         }
 
         public IActionResult Index()
@@ -28,16 +28,22 @@ namespace EcommerceWebsite.Controllers
         [HttpPost]
         public IActionResult GetProduct([FromBody]object product)
         {
-            var jsonresult = iregister.GetProduct(product);
+            //var jsonresult = iregister.GetProduct(product);
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param = product.JsonObjectToDictionary();
+            var jsonresult = service.QueryForObject("LiteDB_Register", "GetProduct", param);
             return Json(jsonresult);
         }
 
         [HttpPost]
         public IActionResult Edit([FromBody]object product)
         {
-            var _product = product.ToString();
-            iregister.Update(_product);
-            return Json(product);
+            //var _product = product.ToString();
+            //iregister.Update(_product);
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param = product.JsonObjectToDictionary();
+            var jsonresult = service.QueryForObject("LiteDB_Register", "UpdateProduct", param);
+            return Json(jsonresult);
         }
 
 

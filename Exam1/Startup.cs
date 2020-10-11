@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EcommerceWebsite.Database;
 using EcommerceWebsite.Database.LiteDB;
 using EcommerceWebsite.Service.Interface;
+using EcommerceWebsite.Service.LiteDB;
 using EcommerceWebsite.Service.LiteDB.EcomerceFashionService;
 using Exam1.Models;
 using Exam1.Service.Interface;
@@ -36,9 +37,10 @@ namespace Exam1
             #region Init LiteDB
             services.Configure<LiteDBOptions>(Configuration.GetSection("LiteDbOptions"));
             services.AddSingleton<DataContext, LiteDBContext>();
-            services.AddScoped<IDBInit, LiteDB_InitFashionShop>();
-            services.AddScoped<IIndex, LiteDB_Index>();
-            services.AddTransient<IRegister, LiteDB_Register>();
+            services.AddSingleton<IDBInit, LiteDB_InitFashionShop>();
+            services.AddSingleton<ILiteDBDataProvider, DataProvider>();
+            //services.AddScoped<IIndex, LiteDB_Index>();
+            //services.AddTransient<IRegister, LiteDB_Register>();
             #endregion
         }
 

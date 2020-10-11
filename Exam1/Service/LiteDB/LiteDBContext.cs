@@ -17,7 +17,6 @@ namespace Exam1.Service.LiteDB
         public LiteDBContext(IOptions<LiteDBOptions> options)
         {
             Database = new LiteDatabase(options.Value.DatabaseLocation);
-            
         }
 
 

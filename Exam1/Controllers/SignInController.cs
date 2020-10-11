@@ -12,31 +12,31 @@ namespace EcommerceWebsite.Controllers
 {
     public class SignInController : Controller
     {
-        private IRegister iregister;
+        //private IRegister iregister;
         
 
-        public SignInController(IRegister service)
-        {
-            iregister = service;
-        }
+        //public SignInController(IRegister service)
+        //{
+        //    iregister = service;
+        //}
 
 
-        public IActionResult Login([Bind("ID,Email,FirstName,LastName,Password")] User model)
-        {
-            List<User> users = iregister.ListUser();
-            IEnumerable<dynamic> products = iregister.ListProduct();
-            ViewBag.Categories = iregister.CategoriesList();
-            ViewBag.Size = iregister.SizeList();
-            ViewBag.Colors = iregister.ColorList();
+        //public IActionResult Login([Bind("ID,Email,FirstName,LastName,Password")] User model)
+        //{
+        //    List<User> users = iregister.ListUser();
+        //    IEnumerable<dynamic> products = iregister.ListProduct();
+        //    ViewBag.Categories = iregister.CategoriesList();
+        //    ViewBag.Size = iregister.SizeList();
+        //    ViewBag.Colors = iregister.ColorList();
 
-            foreach (User user in users)
-            {
-                if (user.Email == model.Email && user.Password == model.Password)
-                {
-                    return View("~/Views/Admin/Maintenance.cshtml", products);
-                }
-            }
-            return View(null);
-        }
+        //    foreach (User user in users)
+        //    {
+        //        if (user.Email == model.Email && user.Password == model.Password)
+        //        {
+        //            return View("~/Views/Admin/Maintenance.cshtml", products);
+        //        }
+        //    }
+        //    return View(null);
+        //}
     }
 }

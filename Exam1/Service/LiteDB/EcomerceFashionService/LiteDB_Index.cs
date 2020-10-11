@@ -11,39 +11,45 @@ using Exam1.Service.Interface;
 
 namespace Exam1.Service.LiteDB.EcomerceFashionService
 {
-    public class LiteDB_Index : IIndex
+    public class LiteDB_Index 
     {
         private LiteDatabase DB;
 
-        public LiteDB_Index(DataContext data, IDBInit init)
+        //public LiteDB_Index(DataContext data, IDBInit init)
+        //{
+        //    DB = data.Database;
+        //    init.InitDB();
+        //}
+
+        public LiteDB_Index(DataContext data)
         {
             DB = data.Database;
-            init.InitDB();
         }
 
-        public List<FSize> SizeList()
+        public IList<Dictionary<string, object>> SizeList()
         {
             return DB.GetCollectionDBModel<FSize>().FindAll().ToList();
         }
 
-        public List<Category> CategoriesList()
+        public IList<Category> CategoriesList()
         {
             return DB.GetCollectionDBModel<Category>().FindAll().ToList();
         }
 
-        public Product Get(int ID)
+        public Product Get(IDictionary<string, object> param)
         {
-            return DB.GetCollectionDBModel<Product>().FindOne(a => a.ID == ID);
+            
+            return DB.GetCollectionDBModel<Product>().FindOne(a => a.ID == Convert.ToInt32(param["ID"]));
         }
 
-        public List<Product> List()
+        public IList<Product> List()
         {
             return DB.GetCollectionDBModel<Product>().FindAll().ToList();
         }
 
-        public int Delete(int ID)
+        public int Delete(IDictionary<string, object> param)
         {
-            return DB.GetCollectionDBModel<Product>().DeleteMany(a => a.ID == ID);
+            return DB.GetCollectionDBModel<Product>().DeleteMany(a => a.ID == Convert.ToInt32(param["ID"]));
         }
     }
 }

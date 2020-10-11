@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
 {
-    public class LiteDB_Register : IRegister
+    public class LiteDB_Register
     {
         private LiteDatabase DB;
 
@@ -20,22 +20,24 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
             DB = db.Database;
         }
 
-        public bool Insert(User model)
+        public bool InsertUser(Dictionary<string, object> param)
         {
+            User model = param.DictionaryToObject<User>();
             return DB.GetCollectionDBModel<User>().Insert(model);
         }
 
-        public bool Update(User model)
+        public bool UpdateUser(Dictionary<string, object> param)
         {
+            User model = param.DictionaryToObject<User>();
             return DB.GetCollectionDBModel<User>().Update(model);
         }
 
-        public User GetUser(int ID)
+        public User GetUser(Dictionary<string,object> param)
         {
-            return DB.GetCollectionDBModel<User>().FindOne(a => a.ID == ID);
+            return DB.GetCollectionDBModel<User>().FindOne(a => a.ID == Convert.ToInt32(param["ID"]));
         }
 
-        public List<User> ListUser()
+        public IList<User> ListUser()
         {
             return DB.GetCollectionDBModel<User>().FindAll().ToList();
         }
@@ -64,7 +66,7 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
             return query;
         }
 
-        public object GetProduct(object _product)
+        public object GetProduct(Dictionary<string,object> _product)
         {
             var ob = _product.JsonObjectToDictionary();
             var productID = Convert.ToInt32(ob.FirstOrDefault(a => a.Key == "productID").Value);
@@ -96,29 +98,30 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
         }
 
 
-        public List<FSize> SizeList()
+        public IList<FSize> SizeList()
         {
             return DB.GetCollectionDBModel<FSize>().FindAll().ToList();
         }
 
-        public List<Category> CategoriesList()
+        public IList<Category> CategoriesList()
         {
             return DB.GetCollectionDBModel<Category>().FindAll().ToList();
         }
 
-        public List<FColor> ColorList()
+        public IList<FColor> ColorList()
         {
             return DB.GetCollectionDBModel<FColor>().FindAll().ToList();
         }
 
-        public bool Insert(Product product)
+        public bool InsertProduct(Dictionary<string, object> param)
         {
+            Product product = param.DictionaryToObject<Product>();
             return DB.GetCollectionDBModel<Product>().Insert(product);
         }
 
-        public bool Update(string productjson)
+        public bool UpdateProduct(Dictionary<string, object> param)
         {
-            Product result = Newtonsoft.Json.JsonConvert.DeserializeObject<Product>(productjson);
+            Product result = param.DictionaryToObject<Product>();
             return DB.GetCollectionDBModel<Product>().Update(result);
         }
     }
