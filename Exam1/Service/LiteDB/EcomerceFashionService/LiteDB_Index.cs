@@ -28,12 +28,12 @@ namespace Exam1.Service.LiteDB.EcomerceFashionService
 
         public IList<Dictionary<string, object>> SizeList()
         {
-            return DB.GetCollectionDBModel<FSize>().FindAll().ToList();
+            return (IList<Dictionary<string, object>>)DB.GetCollectionDBModel<FSize>().FindAll();
         }
 
-        public IList<Category> CategoriesList()
+        public IList<Dictionary<string, object>> CategoriesList()
         {
-            return DB.GetCollectionDBModel<Category>().FindAll().ToList();
+            return (IList<Dictionary<string, object>>)DB.GetCollectionDBModel<Category>().FindAll();
         }
 
         public Product Get(IDictionary<string, object> param)
@@ -42,9 +42,9 @@ namespace Exam1.Service.LiteDB.EcomerceFashionService
             return DB.GetCollectionDBModel<Product>().FindOne(a => a.ID == Convert.ToInt32(param["ID"]));
         }
 
-        public IList<Product> List()
+        public IList<Dictionary<string, object>> List()
         {
-            return DB.GetCollectionDBModel<Product>().FindAll().ToList();
+            return (IList<Dictionary<string, object>>)DB.GetCollectionDBModel<Product>().FindAll();
         }
 
         public int Delete(IDictionary<string, object> param)
