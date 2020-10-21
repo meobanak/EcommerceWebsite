@@ -1,4 +1,5 @@
 ﻿using LiteDB;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Exam1.Service.LiteDB
 {
-    public interface DataContext
+    public interface IDataContext
     {
-        LiteDatabase Database { get; set; }
+        LiteDatabase LiteDBDatabase { get; set; }
+        IMongoDatabase  MongoDBDatabase { get; set; }
     }
 }

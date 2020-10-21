@@ -12,10 +12,10 @@ namespace Exam1.Controllers
 {
     public class HomeController : Controller
     {
-        private ILiteDBDataProvider service;
+        private IDataProvider service;
 
 
-        public HomeController(ILiteDBDataProvider _service)
+        public HomeController(IDataProvider _service)
         {
             service = _service;
         }

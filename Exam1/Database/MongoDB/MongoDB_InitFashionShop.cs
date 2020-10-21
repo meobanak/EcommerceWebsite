@@ -1,26 +1,26 @@
-﻿using Exam1.Extensions;
+﻿using EcommerceWebsite.Extensions;
 using Exam1.Models;
 using Exam1.Service.LiteDB;
-using LiteDB;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EcommerceWebsite.Database.LiteDB
+namespace EcommerceWebsite.Database.MongoDB
 {
-    public class LiteDB_InitFashionShop : IDBInit
+    public class MongoDB_InitFashionShop : IDBInit
     {
-        private LiteDatabase DB;
-        public LiteDB_InitFashionShop(IDataContext context)
+        private IMongoDatabase DB;
+        public MongoDB_InitFashionShop(IDataContext context)
         {
-            DB = context.LiteDBDatabase;
+            DB = context.MongoDBDatabase;
         }
 
         public void InitDB()
         {
             #region Init User data
-            if (DB.GetCollectionDBModel<User>().FindAll().Any() == false)
+            if (DB.GetCollection<User>().FindAll().Any() == false)
             {
                 User user = new User();
                 user.ID = 1;
@@ -28,7 +28,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 user.Password = "admin321";
                 user.FirstName = "Tam";
                 user.LastName = "Nguyen";
-                DB.GetCollectionDBModel<User>().Insert(user);
+                DB.GetCollection<User>().Insert(user);
 
                 User user1 = new User();
                 user1.ID = 2;
@@ -36,94 +36,94 @@ namespace EcommerceWebsite.Database.LiteDB
                 user1.Password = "user";
                 user1.FirstName = "user";
                 user1.LastName = "user";
-                DB.GetCollectionDBModel<User>().Insert(user1);
+                DB.GetCollection<User>().Insert(user1);
             }
             #endregion
 
             #region Init Color data
-            if (DB.GetCollectionDBModel<FColor>().FindAll().Any() == false)
+            if (DB.GetCollection<FColor>().FindAll().Any() == false)
             {
                 FColor color = new FColor();
                 color.ID = 1;
                 color.Code = "0xFFFFFF";
                 color.Name = "White";
-                DB.GetCollectionDBModel<FColor>().Insert(color);
+                DB.GetCollection<FColor>().Insert(color);
 
                 FColor color1 = new FColor();
                 color1.ID = 2;
                 color1.Code = "0xFFFFFF";
                 color1.Name = "Black";
-                DB.GetCollectionDBModel<FColor>().Insert(color1);
+                DB.GetCollection<FColor>().Insert(color1);
             }
             #endregion
 
             #region Init Size data
-            if (DB.GetCollectionDBModel<FSize>().FindAll().Any() == false)
+            if (DB.GetCollection<FSize>().FindAll().Any() == false)
             {
                 FSize size = new FSize();
                 size.ID = 1;
                 size.Name = "S";
                 size.OrderIndex = 1;
-                DB.GetCollectionDBModel<FSize>().Insert(size);
+                DB.GetCollection<FSize>().Insert(size);
 
                 FSize size1 = new FSize();
                 size1.ID = 2;
                 size1.Name = "M";
                 size1.OrderIndex = 2;
-                DB.GetCollectionDBModel<FSize>().Insert(size1);
+                DB.GetCollection<FSize>().Insert(size1);
 
                 FSize size2 = new FSize();
                 size2.ID = 3;
                 size2.Name = "L";
                 size2.OrderIndex = 3;
-                DB.GetCollectionDBModel<FSize>().Insert(size2);
+                DB.GetCollection<FSize>().Insert(size2);
 
                 FSize size3 = new FSize();
                 size3.ID = 4;
                 size3.Name = "XL";
                 size3.OrderIndex = 4;
-                DB.GetCollectionDBModel<FSize>().Insert(size3);
+                DB.GetCollection<FSize>().Insert(size3);
             }
             #endregion
 
             #region Init Category data
-            if (DB.GetCollectionDBModel<Category>().FindAll().Any() == false)
+            if (DB.GetCollection<Category>().FindAll().Any() == false)
             {
                 Category cate = new Category();
                 cate.ID = 1;
                 cate.Code = "S01";
                 cate.Name = "Shirt";
-                DB.GetCollectionDBModel<Category>().Insert(cate);
+                DB.GetCollection<Category>().Insert(cate);
 
                 Category cate1 = new Category();
                 cate1.ID = 2;
                 cate1.Code = "S02";
                 cate1.Name = "T-Shirt";
-                DB.GetCollectionDBModel<Category>().Insert(cate1);
+                DB.GetCollection<Category>().Insert(cate1);
 
                 Category cate2 = new Category();
                 cate2.ID = 3;
                 cate2.Code = "J01";
                 cate2.Name = "Jacket";
-                DB.GetCollectionDBModel<Category>().Insert(cate2);
+                DB.GetCollection<Category>().Insert(cate2);
 
                 Category cate3 = new Category();
                 cate3.ID = 4;
                 cate3.Code = "J02";
                 cate3.Name = "Jeans";
-                DB.GetCollectionDBModel<Category>().Insert(cate3);
+                DB.GetCollection<Category>().Insert(cate3);
 
                 Category cate4 = new Category();
                 cate4.ID = 5;
                 cate4.Code = "P01";
                 cate4.Name = "Pants";
-                DB.GetCollectionDBModel<Category>().Insert(cate4);
+                DB.GetCollection<Category>().Insert(cate4);
             }
 
             #endregion
 
             #region Init Product data
-            if (DB.GetCollectionDBModel<Product>().FindAll().Any() == false)
+            if (DB.GetCollection<Product>().FindAll().Any() == false)
             {
                 #region Shirt
                 Product product = new Product();
@@ -138,7 +138,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product.ColorID = 1;
                 product.Gender = 1;
                 product.imageSrc = "https://outdoor-and-country-res.cloudinary.com/image/upload/e_trim:2/bo_8px_solid_white/c_pad,b_white,w_1000,h_1200,f_auto,q_auto/v1540205233/product/186710.jpg";
-                DB.GetCollectionDBModel<Product>().Insert(product);
+                DB.GetCollection<Product>().Insert(product);
 
                 Product product1 = new Product();
                 product1.ID = 2;
@@ -152,7 +152,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product1.ColorID = 1;
                 product1.Gender = 1;
                 product1.imageSrc = "https://a3655836d5c58a086ac2-4e8d43a89f100386d472e9f1a1dc59ca.ssl.cf3.rackcdn.com/images/original/dbf68972-c4aa-447b-9726-c11fd209cc7d.jpg";
-                DB.GetCollectionDBModel<Product>().Insert(product1);
+                DB.GetCollection<Product>().Insert(product1);
 
                 Product product2 = new Product();
                 product2.ID = 3;
@@ -166,7 +166,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product2.ColorID = 1;
                 product2.Gender = 1;
                 product2.imageSrc = "https://cdn.shopify.com/s/files/1/1832/4455/products/1153_S17_IconShirt_MendocinoBlue_FR.jpg?v=1572027022";
-                DB.GetCollectionDBModel<Product>().Insert(product2);
+                DB.GetCollection<Product>().Insert(product2);
                 #endregion
 
                 #region T-shirt
@@ -182,7 +182,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product3.ColorID = 1;
                 product3.Gender = 1;
                 product3.imageSrc = "https://cdn11.bigcommerce.com/s-rxzabllq/images/stencil/1280x1280/products/910/18045/Kids-Plain-Poly-Fit-Quick_Dry-Tshirt-red__13799.1567089094.jpg?c=2";
-                DB.GetCollectionDBModel<Product>().Insert(product3);
+                DB.GetCollection<Product>().Insert(product3);
 
                 Product product4 = new Product();
                 product4.ID = 5;
@@ -196,7 +196,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product4.ColorID = 1;
                 product4.Gender = 1;
                 product4.imageSrc = "https://d2h2vnfmmg5sct.cloudfront.net/catalog/product/large_image/02_414443.jpg";
-                DB.GetCollectionDBModel<Product>().Insert(product4);
+                DB.GetCollection<Product>().Insert(product4);
 
                 Product product5 = new Product();
                 product5.ID = 6;
@@ -210,7 +210,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product5.ColorID = 1;
                 product5.Gender = 1;
                 product5.imageSrc = "https://images-na.ssl-images-amazon.com/images/I/61mSyjeYXWL._AC_UX679_.jpg";
-                DB.GetCollectionDBModel<Product>().Insert(product5);
+                DB.GetCollection<Product>().Insert(product5);
                 #endregion
 
                 #region Jacket
@@ -226,7 +226,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product6.ColorID = 1;
                 product6.Gender = 1;
                 product6.imageSrc = "https://product.hstatic.net/1000306633/product/5bc67f9a-f1db-4405-9583-9ebc476078b5_4335d664706d4ec0a53e337da90c06a3_master.jpg";
-                DB.GetCollectionDBModel<Product>().Insert(product6);
+                DB.GetCollection<Product>().Insert(product6);
 
                 Product product7 = new Product();
                 product7.ID = 8;
@@ -240,7 +240,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product7.ColorID = 1;
                 product7.Gender = 1;
                 product7.imageSrc = "https://cdni.llbean.net/is/image/wim/507067_0_46?hei=1095&wid=950&resMode=sharp2&defaultImage=llbstage/A0211793_2";
-                DB.GetCollectionDBModel<Product>().Insert(product7);
+                DB.GetCollection<Product>().Insert(product7);
 
                 Product product8 = new Product();
                 product8.ID = 9;
@@ -254,7 +254,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product8.ColorID = 1;
                 product8.Gender = 1;
                 product8.imageSrc = "https://cf.shopee.ph/file/70f66a937abf9230417e1700379ca3ee";
-                DB.GetCollectionDBModel<Product>().Insert(product8);
+                DB.GetCollection<Product>().Insert(product8);
                 #endregion
 
                 #region Jeans
@@ -270,7 +270,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product9.ColorID = 1;
                 product9.Gender = 1;
                 product9.imageSrc = "https://i1.wp.com/ae01.alicdn.com/kf/HTB1U7edb9WD3KVjSZSgq6ACxVXaN/2019-New-autumn-Men-s-cotton-Jeans-men-Business-Casual-Stretch-Jean-Classic-Trousers-Denim-Blue.jpg?fit=800%2C800&ssl=1";
-                DB.GetCollectionDBModel<Product>().Insert(product9);
+                DB.GetCollection<Product>().Insert(product9);
 
                 Product product10 = new Product();
                 product10.ID = 11;
@@ -284,7 +284,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product10.ColorID = 1;
                 product10.Gender = 1;
                 product10.imageSrc = "https://cdn.mudjeans.eu/wp-content/uploads/2018/04/Man-Ethical-Jeans-Regular-Dunn-Stone-Blue-halffront-1.jpg";
-                DB.GetCollectionDBModel<Product>().Insert(product10);
+                DB.GetCollection<Product>().Insert(product10);
 
                 Product product11 = new Product();
                 product11.ID = 12;
@@ -298,7 +298,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product11.ColorID = 1;
                 product11.Gender = 1;
                 product11.imageSrc = "https://www1.assets-gap.com/webcontent/0015/058/596/cn15058596.jpg";
-                DB.GetCollectionDBModel<Product>().Insert(product11);
+                DB.GetCollection<Product>().Insert(product11);
                 #endregion
 
                 #region Pant
@@ -314,7 +314,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product12.ColorID = 1;
                 product12.Gender = 1;
                 product12.imageSrc = "https://cdn.shopify.com/s/files/1/0071/5633/4681/products/Men_Original-Mountain-Pant_Relaxed-Fit_Terra_272_grande.jpg?v=1568320083";
-                DB.GetCollectionDBModel<Product>().Insert(product12);
+                DB.GetCollection<Product>().Insert(product12);
 
                 Product product13 = new Product();
                 product13.ID = 14;
@@ -328,7 +328,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product13.ColorID = 1;
                 product13.Gender = 1;
                 product13.imageSrc = "https://cdn.shopify.com/s/files/1/0023/9901/0881/products/M-Coburn-Pant-Storm-Cloud_5f952c4f-d899-484f-b891-acf4f37f6269_1400x1400.jpg?v=1582657066";
-                DB.GetCollectionDBModel<Product>().Insert(product13);
+                DB.GetCollection<Product>().Insert(product13);
 
                 Product product14 = new Product();
                 product14.ID = 15;
@@ -342,7 +342,7 @@ namespace EcommerceWebsite.Database.LiteDB
                 product14.ColorID = 1;
                 product14.Gender = 1;
                 product14.imageSrc = "https://images.puma.net/images/596699/32/fnd/AUS/w/1000/h/1000/bg/255,255,255";
-                DB.GetCollectionDBModel<Product>().Insert(product14);
+                DB.GetCollection<Product>().Insert(product14);
                 #endregion
             }
             #endregion

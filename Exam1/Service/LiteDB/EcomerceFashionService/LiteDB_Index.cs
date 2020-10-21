@@ -21,7 +21,7 @@ namespace Exam1.Service.LiteDB.EcomerceFashionService
         //    init.InitDB();
         //}
 
-        public LiteDB_Index(DataContext data)
+        public LiteDB_Index(IDataContext data)
         {
             DB = data.Database;
         }

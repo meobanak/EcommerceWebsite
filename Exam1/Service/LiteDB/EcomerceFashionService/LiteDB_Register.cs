@@ -15,7 +15,7 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
     {
         private LiteDatabase DB;
 
-        public LiteDB_Register(DataContext db)
+        public LiteDB_Register(IDataContext db)
         {
             DB = db.Database;
         }

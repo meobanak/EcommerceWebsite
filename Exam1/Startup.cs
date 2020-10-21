@@ -35,10 +35,10 @@ namespace Exam1
         {
             services.AddMvc();
             #region Init LiteDB
-            services.Configure<LiteDBOptions>(Configuration.GetSection("LiteDbOptions"));
-            services.AddSingleton<DataContext, LiteDBContext>();
+            services.Configure<LiteDBOption>(Configuration.GetSection("LiteDbOptions"));
+            services.AddSingleton<IDataContext, LiteDBContext>();
             services.AddSingleton<IDBInit, LiteDB_InitFashionShop>();
-            services.AddSingleton<ILiteDBDataProvider, DataProvider>();
+            services.AddSingleton<IDataProvider, LiteDBDataProvider>();
             //services.AddScoped<IIndex, LiteDB_Index>();
             //services.AddTransient<IRegister, LiteDB_Register>();
             #endregion

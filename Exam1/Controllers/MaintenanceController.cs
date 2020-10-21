@@ -13,9 +13,9 @@ namespace EcommerceWebsite.Controllers
 {
     public class MaintenanceController : Controller
     {
-        private ILiteDBDataProvider service;
+        private IDataProvider service;
 
-        public MaintenanceController(ILiteDBDataProvider _service)
+        public MaintenanceController(IDataProvider _service)
         {
             service = _service;
         }

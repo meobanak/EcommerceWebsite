@@ -2,6 +2,7 @@
 using Exam1.Models;
 using LiteDB;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Exam1.Service.LiteDB
 {
-    public class LiteDBContext : DataContext 
+    public class LiteDBContext : IDataContext 
     {
-        public LiteDatabase Database { get; set; }
-
-        public LiteDBContext(IOptions<LiteDBOptions> options)
+        public LiteDatabase LiteDBDatabase { get; set; }
+        public IMongoDatabase MongoDBDatabase { get; set; }
+        public LiteDBContext(IOptions<LiteDBOption> options)
         {
-            Database = new LiteDatabase(options.Value.DatabaseLocation);
+            LiteDBDatabase = new LiteDatabase(options.Value.DatabaseLocation);
         }
 
 

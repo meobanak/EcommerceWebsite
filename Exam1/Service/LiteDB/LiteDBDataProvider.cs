@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Service.LiteDB
 {
-    public class DataProvider : ILiteDBDataProvider
+    public class LiteDBDataProvider : IDataProvider
     {
-        DataContext datacontext;
-        public DataProvider(IDBInit init, DataContext _data)
+        IDataContext datacontext;
+        public LiteDBDataProvider(IDBInit init, IDataContext _data)
         {
             datacontext = _data;
             init.InitDB();

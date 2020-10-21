@@ -49,10 +49,6 @@
     <None Include="wwwroot\js\wow.min.js" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Database\MongoDB\" />
-  </ItemGroup>
-
 
 
 </Project>

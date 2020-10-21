@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Service.Interface
 {
-    public interface ILiteDBDataProvider
+    public interface IDataProvider
     {
         IList<Dictionary<string, object>> QueryForList(string ServiceName, string action, Dictionary<string, object> param);
 

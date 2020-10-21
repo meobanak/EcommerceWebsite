@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Exam1.Models
+namespace EcommerceWebsite.Service.DBOptions
 {
-    public class LiteDBOptions
+    public class MongoDBOption
     {
-        public const string LiteDbOptions = "LiteDbOptions";
+        public const string MongoDBOptions = "MongoDBOptions";
         public string DatabaseLocation { get; set; }
     }
 }
