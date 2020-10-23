@@ -2,6 +2,7 @@
 using EcommerceWebsite.Service.Interface;
 using Exam1.Extensions;
 using Exam1.Models;
+using Exam1.Service.Interface;
 using Exam1.Service.LiteDB;
 using LiteDB;
 using System;
@@ -13,11 +14,11 @@ namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
 {
     public class LiteDB_Register
     {
-        private LiteDatabase DB;
+        private ILiteDatabase DB;
 
         public LiteDB_Register(IDataContext db)
         {
-            DB = db.Database;
+            DB = db.GetDatabase<ILiteDatabase>();
         }
 
         public bool InsertUser(Dictionary<string, object> param)

@@ -1,5 +1,7 @@
 ﻿using EcommerceWebsite.Database;
+using EcommerceWebsite.Service.Interface;
 using Exam1.Models;
+using Exam1.Service.Interface;
 using LiteDB;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -13,15 +15,18 @@ namespace Exam1.Service.LiteDB
 {
     public class LiteDBContext : IDataContext 
     {
-        public LiteDatabase LiteDBDatabase { get; set; }
-        public IMongoDatabase MongoDBDatabase { get; set; }
+        private ILiteDatabase Database { get; set; }
         public LiteDBContext(IOptions<LiteDBOption> options)
         {
-            LiteDBDatabase = new LiteDatabase(options.Value.DatabaseLocation);
+            Database = new LiteDatabase(options.Value.DatabaseLocation) ;
         }
 
+        public T GetDatabase<T>()
+        {
+            return (T)Database;
+        }    
 
 
-       
+
     }
 }

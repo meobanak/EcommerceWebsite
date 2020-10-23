@@ -1,6 +1,7 @@
 ﻿using EcommerceWebsite.Database;
 using EcommerceWebsite.Service.Interface;
 using EcommerceWebsite.Service.LiteDB.EcomerceFashionService;
+using Exam1.Service.Interface;
 using Exam1.Service.LiteDB;
 using Exam1.Service.LiteDB.EcomerceFashionService;
 using LiteDB;
@@ -22,7 +23,7 @@ namespace EcommerceWebsite.Service.LiteDB
 
         public IList<Dictionary<string, object>> QueryForList(string ServiceName, string action, Dictionary<string, object> param)
         {
-            if (ServiceName == "LiteDB_Index")
+            if (ServiceName == "Index")
             {
                 LiteDB_Index IndexService = new LiteDB_Index(datacontext);
                 switch (action)
@@ -44,7 +45,7 @@ namespace EcommerceWebsite.Service.LiteDB
                 }
             }
 
-            if (ServiceName == "LiteDB_Register")
+            if (ServiceName == "Register")
             {
                 LiteDB_Register RegisterService = new LiteDB_Register(datacontext);
                 switch (action)
@@ -98,7 +99,7 @@ namespace EcommerceWebsite.Service.LiteDB
                 }
             }
 
-            if (ServiceName == "LiteDB_Detail")
+            if (ServiceName == "Detail")
             {
                 switch (action)
                 {

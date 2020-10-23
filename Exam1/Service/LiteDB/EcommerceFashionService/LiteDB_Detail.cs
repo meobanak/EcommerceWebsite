@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Service.LiteDB.EcomerceFashionService
 {
-    public class LiteDB_Detail : IDetail
+    public class LiteDB_Detail
     {
 
     }

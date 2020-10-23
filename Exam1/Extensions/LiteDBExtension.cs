@@ -8,7 +8,7 @@ namespace Exam1.Extensions
 {
     public static class LiteDBExtension
     {
-        public static ILiteCollection<T> GetCollectionDBModel<T>(this LiteDatabase db)
+        public static ILiteCollection<T> GetCollectionDBModel<T>(this ILiteDatabase db)
         {
             ILiteCollection<T> model;
             model = db.GetCollection<T>(typeof(T).Name.ToString());

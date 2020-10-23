@@ -13,7 +13,7 @@ namespace Exam1.Service.LiteDB.EcomerceFashionService
 {
     public class LiteDB_Index 
     {
-        private LiteDatabase DB;
+        private ILiteDatabase DB;
 
         //public LiteDB_Index(DataContext data, IDBInit init)
         //{
@@ -23,7 +23,7 @@ namespace Exam1.Service.LiteDB.EcomerceFashionService
 
         public LiteDB_Index(IDataContext data)
         {
-            DB = data.Database;
+            DB = data.GetDatabase<ILiteDatabase>();
         }
 
         public IList<Dictionary<string, object>> SizeList()

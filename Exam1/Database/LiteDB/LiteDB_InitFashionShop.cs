@@ -1,5 +1,6 @@
 ﻿using Exam1.Extensions;
 using Exam1.Models;
+using Exam1.Service.Interface;
 using Exam1.Service.LiteDB;
 using LiteDB;
 using System;
@@ -11,10 +12,10 @@ namespace EcommerceWebsite.Database.LiteDB
 {
     public class LiteDB_InitFashionShop : IDBInit
     {
-        private LiteDatabase DB;
+        private ILiteDatabase DB;
         public LiteDB_InitFashionShop(IDataContext context)
         {
-            DB = context.LiteDBDatabase;
+            DB = context.GetDatabase<ILiteDatabase>();
         }
 
         public void InitDB()

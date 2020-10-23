@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EcommerceWebsite.Database;
 using EcommerceWebsite.Database.LiteDB;
+using EcommerceWebsite.Service.DBOptions;
 using EcommerceWebsite.Service.Interface;
 using EcommerceWebsite.Service.LiteDB;
 using EcommerceWebsite.Service.LiteDB.EcomerceFashionService;
@@ -35,7 +36,8 @@ namespace Exam1
         {
             services.AddMvc();
             #region Init LiteDB
-            services.Configure<LiteDBOption>(Configuration.GetSection("LiteDbOptions"));
+            //services.Configure<LiteDBOption>(Configuration.GetSection("LiteDbOptions"));
+            services.Configure<MongoDBOption>(Configuration.GetSection("MongoDBOptions"));
             services.AddSingleton<IDataContext, LiteDBContext>();
             services.AddSingleton<IDBInit, LiteDB_InitFashionShop>();
             services.AddSingleton<IDataProvider, LiteDBDataProvider>();

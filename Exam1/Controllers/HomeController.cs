@@ -22,7 +22,7 @@ namespace Exam1.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var result = service.QueryForList("LiteDB_Index", "List",null);
+            var result = service.QueryForList("Index", "List",null);
             return View(result);
         }
 
@@ -32,9 +32,9 @@ namespace Exam1.Controllers
             //var result = service.Get(ID);
             Dictionary<string, object> param = new Dictionary<string, object>();
             param["ID"] = ID;
-            var result = service.QueryForObject("LiteDB_Index", "Get",param);
+            var result = service.QueryForObject("Index", "Get",param);
 
-            ViewBag.FSize = service.QueryForList("LiteDB_Index", "SizeList",null);
+            ViewBag.FSize = service.QueryForList("Index", "SizeList",null);
             return View("~/Views/Home/Detail.cshtml", result);
         }
 
