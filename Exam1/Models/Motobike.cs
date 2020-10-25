@@ -9,9 +9,6 @@ namespace Exam1.Models
 {
     public class Motobike
     {
-
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public int ID { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }

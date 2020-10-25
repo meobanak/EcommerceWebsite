@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using EcommerceWebsite.Database;
 using EcommerceWebsite.Database.LiteDB;
+using EcommerceWebsite.Database.MongoDB;
 using EcommerceWebsite.Service.DBOptions;
 using EcommerceWebsite.Service.Interface;
 using EcommerceWebsite.Service.LiteDB;
 using EcommerceWebsite.Service.LiteDB.EcomerceFashionService;
+using EcommerceWebsite.Service.MongoDB;
 using Exam1.Models;
 using Exam1.Service.Interface;
 using Exam1.Service.LiteDB;
@@ -38,9 +40,9 @@ namespace Exam1
             #region Init LiteDB
             //services.Configure<LiteDBOption>(Configuration.GetSection("LiteDbOptions"));
             services.Configure<MongoDBOption>(Configuration.GetSection("MongoDBOptions"));
-            services.AddSingleton<IDataContext, LiteDBContext>();
-            services.AddSingleton<IDBInit, LiteDB_InitFashionShop>();
-            services.AddSingleton<IDataProvider, LiteDBDataProvider>();
+            services.AddSingleton<IDataContext, MongoDBContext>();
+            services.AddSingleton<IDBInit, MongoDB_InitFashionShop>();
+            services.AddSingleton<IDataProvider, MongoDBDataProvider>();
             //services.AddScoped<IIndex, LiteDB_Index>();
             //services.AddTransient<IRegister, LiteDB_Register>();
             #endregion

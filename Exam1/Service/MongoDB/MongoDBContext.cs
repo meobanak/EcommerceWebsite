@@ -15,8 +15,8 @@ namespace EcommerceWebsite.Service.LiteDB
         private IMongoDatabase Database { get; set; }
         public MongoDBContext(IOptions<MongoDBOption> options)
         {
-            var client = new MongoClient(options.Value.DatabaseLocation);
-            Database = client.GetDatabase("FashionShop");
+            var client = new MongoClient(options.Value.ConnectionString);
+            Database = client.GetDatabase(options.Value.DatabaseName);
         }
 
         public T GetDatabase<T>()

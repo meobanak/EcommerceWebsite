@@ -31,8 +31,8 @@ namespace EcommerceWebsite.Service.MongoDB.EcommerceFashionService
 
         public Product Get(IDictionary<string, object> param)
         {
-
-            return DB.GetCollection<Product>().FindOne(a => a.ID == Convert.ToInt32(param["ID"]));
+            var filter = Builders<Product>.Filter.Eq("ID", Convert.ToInt32(param["ID"]));
+            return DB.GetCollection<Product>().Find(filter).FirstOrDefault();
         }
 
         public IList<Dictionary<string, object>> List()
@@ -40,11 +40,10 @@ namespace EcommerceWebsite.Service.MongoDB.EcommerceFashionService
             return (IList<Dictionary<string, object>>)DB.GetCollection<Product>().Find(new BsonDocument());
         }
 
-        public int Delete(IDictionary<string, object> param)
+        public void Delete(IDictionary<string, object> param)
         {
-            return DB.GetCollection<Product>().DeleteMany(
-                a => a.ID == Convert.ToInt32(param["ID"])
-                );
+            var filter = Builders<Product>.Filter.Eq("ID", Convert.ToInt32(param["ID"]));
+            DB.GetCollection<Product>().DeleteOne(filter);
         }
     }
 }

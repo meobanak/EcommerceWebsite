@@ -8,6 +8,7 @@ namespace EcommerceWebsite.Service.DBOptions
     public class MongoDBOption
     {
         public const string MongoDBOptions = "MongoDBOptions";
-        public string DatabaseLocation { get; set; }
+        public string ConnectionString { get; set; }
+        public string DatabaseName { get; set; }
     }
 }

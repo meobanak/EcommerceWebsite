@@ -9,8 +9,6 @@ namespace Exam1.Models
 {
     public class Product
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public int ID { get; set; }
         public string Code { get; set; }
         public int CategoryID { get; set; }

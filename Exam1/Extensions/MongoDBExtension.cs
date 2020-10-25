@@ -16,5 +16,14 @@ namespace EcommerceWebsite.Extensions
             collection = db.GetCollection<T>(typeof(T).Name.ToString());
             return collection;
         }
+
+        public static void UpdateOneExtend<T>(this IMongoCollection<T> collectionName, FilterDefinition<T> filter, Dictionary<string, object> param)
+        {
+            foreach (var field in param)
+            {
+                var update = Builders<T>.Update.Set(param.Keys.ToString(), param.Values);
+                collectionName.UpdateOne(filter, update);
+            }
+        }
     }
 }

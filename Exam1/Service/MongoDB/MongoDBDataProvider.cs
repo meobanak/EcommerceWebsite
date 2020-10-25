@@ -45,7 +45,7 @@ namespace EcommerceWebsite.Service.MongoDB
 
             if (ServiceName == "Register")
             {
-                LiteDB_Register RegisterService = new LiteDB_Register(datacontext);
+                MongoDB_Register RegisterService = new MongoDB_Register(datacontext);
                 switch (action)
                 {
                     case "InsertUser":

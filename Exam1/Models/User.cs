@@ -9,8 +9,6 @@ namespace Exam1.Models
 {
     public class User
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public int ID { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
