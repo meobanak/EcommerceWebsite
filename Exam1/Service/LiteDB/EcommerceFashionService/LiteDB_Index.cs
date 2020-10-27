@@ -26,14 +26,14 @@ namespace Exam1.Service.LiteDB.EcomerceFashionService
             DB = data.GetDatabase<ILiteDatabase>();
         }
 
-        public IList<Dictionary<string, object>> SizeList()
+        public List<Dictionary<string, object>> SizeList()
         {
-            return (IList<Dictionary<string, object>>)DB.GetCollectionDBModel<FSize>().FindAll();
+            return (List<Dictionary<string, object>>)DB.GetCollectionDBModel<FSize>().FindAll();
         }
 
-        public IList<Dictionary<string, object>> CategoriesList()
+        public List<Dictionary<string, object>> CategoriesList()
         {
-            return (IList<Dictionary<string, object>>)DB.GetCollectionDBModel<Category>().FindAll();
+            return (List<Dictionary<string, object>>)DB.GetCollectionDBModel<Category>().FindAll();
         }
 
         public Product Get(IDictionary<string, object> param)
@@ -42,12 +42,12 @@ namespace Exam1.Service.LiteDB.EcomerceFashionService
             return DB.GetCollectionDBModel<Product>().FindOne(a => a.ID == Convert.ToInt32(param["ID"]));
         }
 
-        public IList<Dictionary<string, object>> List()
+        public List<Dictionary<string, object>> List()
         {
-            return (IList<Dictionary<string, object>>)DB.GetCollectionDBModel<Product>().FindAll();
+            return (List<Dictionary<string, object>>)DB.GetCollectionDBModel<Product>().FindAll();
         }
 
-        public int Delete(IDictionary<string, object> param)
+        public int Delete(Dictionary<string, object> param)
         {
             return DB.GetCollectionDBModel<Product>().DeleteMany(a => a.ID == Convert.ToInt32(param["ID"]));
         }

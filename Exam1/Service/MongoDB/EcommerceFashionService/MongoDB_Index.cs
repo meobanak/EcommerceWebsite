@@ -19,14 +19,14 @@ namespace EcommerceWebsite.Service.MongoDB.EcommerceFashionService
             DB = data.GetDatabase<IMongoDatabase>();
         }
 
-        public IList<Dictionary<string, object>> SizeList()
+        public List<Dictionary<string, object>> SizeList()
         {
-            return (IList<Dictionary<string, object>>)DB.GetCollection<FSize>().Find(new BsonDocument());
+            return (List<Dictionary<string, object>>)DB.GetCollection<FSize>().Find(new BsonDocument());
         }
 
-        public IList<Dictionary<string, object>> CategoriesList()
+        public List<Dictionary<string, object>> CategoriesList()
         {
-            return (IList<Dictionary<string, object>>)DB.GetCollection<Category>().Find(new BsonDocument());
+            return (List<Dictionary<string, object>>)DB.GetCollection<Category>().Find(new BsonDocument());
         }
 
         public Product Get(IDictionary<string, object> param)
@@ -35,9 +35,11 @@ namespace EcommerceWebsite.Service.MongoDB.EcommerceFashionService
             return DB.GetCollection<Product>().Find(filter).FirstOrDefault();
         }
 
-        public IList<Dictionary<string, object>> List()
+        public List<Dictionary<string, object>> List()
         {
-            return (IList<Dictionary<string, object>>)DB.GetCollection<Product>().Find(new BsonDocument());
+            //return (IList<Dictionary<string, object>>)DB.GetCollection<Product>().Find(new BsonDocument());
+            var filter = Builders<Product>.Filter.Empty;
+            return DB.GetCollection<Product>().Find(filter).ToList().ToListDictionary();
         }
 
         public void Delete(IDictionary<string, object> param)

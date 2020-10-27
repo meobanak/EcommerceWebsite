@@ -21,7 +21,7 @@ namespace EcommerceWebsite.Service.LiteDB
             init.InitDB();
         }
 
-        public IList<Dictionary<string, object>> QueryForList(string ServiceName, string action, Dictionary<string, object> param)
+        public List<Dictionary<string, object>> QueryForList(string ServiceName, string action, Dictionary<string, object> param)
         {
             if (ServiceName == "Index")
             {

@@ -8,7 +8,7 @@ namespace EcommerceWebsite.Service.Interface
 {
     public interface IDataProvider
     {
-        IList<Dictionary<string, object>> QueryForList(string ServiceName, string action, Dictionary<string, object> param);
+        List<Dictionary<string, object>> QueryForList(string ServiceName, string action, Dictionary<string, object> param);
 
         Dictionary<string, object> QueryForObject(string ServiceName, string action, Dictionary<string, object> param);
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using MongoDB.Driver;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,20 @@ namespace EcommerceWebsite.Extensions
             });
             return results;
         }
+
+
+        public static List<Dictionary<string, object>> ToListDictionary<T>(this List<T> param)
+        {
+            List<Dictionary<string, object>> results = new List<Dictionary<string, object>>();
+            if (param == null)
+                results = null;
+            foreach(var item in param)
+            {
+                results.Add(item);
+            }
+            return results;
+        }
+
 
         public static T DictionaryToObject<T>(this IDictionary<string, object> source)
         {
