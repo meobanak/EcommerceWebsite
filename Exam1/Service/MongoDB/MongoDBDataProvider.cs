@@ -111,7 +111,7 @@ namespace EcommerceWebsite.Service.MongoDB
         }
 
 
-        public Dictionary<string, object> QueryForObject(string ServiceName, string action, Dictionary<string, object> param)
+        public IDictionary<string, object> QueryForObject(string ServiceName, string action, Dictionary<string, object> param)
         {
             return null;
         }

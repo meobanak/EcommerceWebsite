@@ -34,18 +34,26 @@ namespace EcommerceWebsite.Extensions
         }
 
 
-        public static List<Dictionary<string, object>> ToListDictionary<T>(this List<T> param)
+        public static IList<Dictionary<string, object>> ToListDictionary<T>(this List<T> param)
         {
-            List<Dictionary<string, object>> results = new List<Dictionary<string, object>>();
+            IList<Dictionary<string, object>> results = new List<Dictionary<string, object>>();
             if (param == null)
                 results = null;
+
             foreach(var item in param)
             {
-                results.Add(item);
+                results.Add(item.ObjectToDictionary());
             }
             return results;
         }
 
+
+        public static Dictionary<string,object> ObjectToDictionary<T>(this T param)
+        {
+            return param.GetType()
+             .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                  .ToDictionary(prop => prop.Name, prop => prop.GetValue(param, null));
+        }
 
         public static T DictionaryToObject<T>(this IDictionary<string, object> source)
         {

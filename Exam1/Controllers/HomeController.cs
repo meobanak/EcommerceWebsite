@@ -14,11 +14,11 @@ namespace Exam1.Controllers
     {
         private IDataProvider service;
 
-
         public HomeController(IDataProvider _service)
         {
             service = _service;
         }
+
         [HttpGet]
         public IActionResult Index()
         {

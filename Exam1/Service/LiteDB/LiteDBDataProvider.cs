@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Service.LiteDB
 {
-    public class LiteDBDataProvider : IDataProvider
+    public class LiteDBDataProvider 
     {
         IDataContext datacontext;
         public LiteDBDataProvider(IDBInit init, IDataContext _data)

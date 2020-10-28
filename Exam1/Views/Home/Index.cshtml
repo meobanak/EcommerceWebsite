@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product>
+﻿@model IList<Dictionary<string,object>>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -54,12 +54,12 @@
             <div class="content-top1">
                 <div class="col-md-3 col-md2 animated wow fadeInLeft" data-wow-delay=".5s">
                     <div class="col-md1 simpleCart_shelfItem">
-                        <a asp-action="Detail" asp-route-id="@Model.ElementAt(5).ID">
-                            <img class="img-responsive" src= @Model.ElementAt(5).imageSrc alt="" />
+                        <a asp-action="Detail" asp-route-id="@Model.ElementAt(5)["ID"]">
+                            <img class="img-responsive" src= @Model.ElementAt(5)["imageSrc"] alt="" />
                         </a>
-                        <h3><a asp-action="Detail" asp-route-id="ID">@Model.ElementAt(5).Name</a></h3>
+                        <h3><a asp-action="Detail" asp-route-id="ID">@Model.ElementAt(5)["Name"]</a></h3>
                         <div class="price">
-                            <h5 class="item_price">@Model.ElementAt(5).Price</h5>
+                            <h5 class="item_price">@Model.ElementAt(5)["Price"]</h5>
                             <a href="#" class="item_add">Add To Cart</a>
                             <div class="clearfix"> </div>
                         </div>
@@ -74,12 +74,12 @@
                 </div>
                 <div class="col-md-3 col-md2 animated wow fadeInRight" data-wow-delay=".5s">
                     <div class="col-md1 simpleCart_shelfItem">
-                        <a asp-action="Detail" asp-route-id="@Model.ElementAt(6).ID">
-                            <img class="img-responsive" src=@Model.ElementAt(6).imageSrc alt="" />
+                        <a asp-action="Detail" asp-route-id="@Model.ElementAt(6)["ID"]">
+                            <img class="img-responsive" src=@Model.ElementAt(6)["imageSrc"] alt="" />
                         </a>
-                        <h3><a asp-action="Detail" asp-route-id="ID">@Model.ElementAt(6).Name</a></h3>
+                        <h3><a asp-action="Detail" asp-route-id="ID">@Model.ElementAt(6)["Name"]</a></h3>
                         <div class="price">
-                            <h5 class="item_price">@Model.ElementAt(6).Price</h5>
+                            <h5 class="item_price">@Model.ElementAt(6)["Price"]</h5>
                             <a href="#" class="item_add">Add To Cart</a>
                             <div class="clearfix"> </div>
                         </div>
@@ -90,15 +90,15 @@
             <div class="content-top1">
                 @for(int i = 1; i<5; i++)
                 {
-                    Product product = Model.ElementAt(i);
+                    Dictionary<string,object> product = Model.ElementAt(i);
                     <div class="col-md-3 col-md2 animated wow fadeInLeft" data-wow-delay=".5s">
                         <div class="col-md1 simpleCart_shelfItem">
-                            <a asp-action="Detail" asp-route-id="@product.ID">
-                                <img class="img-responsive" src=@product.imageSrc alt="" />
+                            <a asp-action="Detail" asp-route-id="@product["ID"]">
+                                <img class="img-responsive" src=@product["imageSrc"] alt="" />
                             </a>
-                            <h3><a asp-action="Detail" asp-route-id="@product.ID">@product.Name</a></h3>
+                            <h3><a asp-action="Detail" asp-route-id="@product["ID"]">@product["Name"]</a></h3>
                             <div class="price">
-                                <h5 class="item_price">@product.Price</h5>
+                                <h5 class="item_price">@product["Price"]</h5>
                                 <a class="item_add">Add To Cart</a>
                                 <div class="clearfix"> </div>
                             </div>
@@ -193,17 +193,17 @@
         <div class="container">
             @for (int i = 8; i < 12; i++)
             {
-                Product product = Model.ElementAt(i);
+                Dictionary<string, object> product = Model.ElementAt(i);
                 if (i % 2 == 0)
                 {
                     <div class="col-md-3 col-md2 animated wow fadeInLeft" data-wow-delay=".5s">
                         <div class="col-md1 simpleCart_shelfItem">
-                            <a a asp-action="Detail" asp-route-id="@product.ID">
-                                <img class="img-responsive" src=@product.imageSrc alt="" />
+                            <a a asp-action="Detail" asp-route-id="@product["ID"]">
+                                <img class="img-responsive" src=@product["imageSrc"] alt="" />
                             </a>
-                            <h3><a asp-action="Detail" asp-route-id="@product.ID">@product.Name</a></h3>
+                            <h3><a asp-action="Detail" asp-route-id="@product["ID"]">@product["Name"]</a></h3>
                             <div class="price">
-                                <h5 class="item_price">@product.Price</h5>
+                                <h5 class="item_price">@product["Price"]</h5>
                                 <a href="#" class="item_add">Add To Cart</a>
                                 <div class="clearfix"> </div>
                             </div>
@@ -216,12 +216,12 @@
                 {
                     <div class="col-md-3 col-md2 animated wow fadeInLeft" data-wow-delay=".5s">
                         <div class="col-md1 simpleCart_shelfItem">
-                            <a a asp-action="Detail" asp-route-id="@product.ID">
-                                <img class="img-responsive" src=@product.imageSrc  alt="" />
+                            <a a asp-action="Detail" asp-route-id="@product["ID"]">
+                                <img class="img-responsive" src=@product["imageSrc"]  alt="" />
                             </a>
-                            <h3><a asp-action="Detail" asp-route-id="@product.ID">@product.Name</a></h3>
+                            <h3><a asp-action="Detail" asp-route-id="@product["ID"]">@product["Name"]</a></h3>
                             <div class="price">
-                                <h5 class="item_price">@product.Price</h5>
+                                <h5 class="item_price">@product["Price"]</h5>
                                 <a href="#" class="item_add">Add To Cart</a>
                                 <div class="clearfix"> </div>
                             </div>
