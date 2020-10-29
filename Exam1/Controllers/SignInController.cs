@@ -20,16 +20,20 @@ namespace EcommerceWebsite.Controllers
             service = _service;
         }
 
-        public IActionResult Login([Bind("ID,Email,FirstName,LastName,Password")] Dictionary<string, object> model)
+        public IActionResult Login([Bind("ID,Email,FirstName,LastName,Password")] User model)
         {
             ViewBag.Products = service.QueryForList("Register","ListProduct",null);
             ViewBag.Categories = service.QueryForList("Register", "CategoriesList", null);
             ViewBag.Size = service.QueryForList("Register", "SizeList",null);
             ViewBag.Colors = service.QueryForList("Register", "ColorList", null);
 
-            if (CheckUserExist(model))
+
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param["email"] = model.Email;
+            param["password"] = model.Password;
+            if (CheckUserExist(param))
             {
-                return View("~/Views/Admin/Maintenance.cshtml");
+                return View("~/Views/Admin/Maintenance.cshtml", ViewBag);
             }
 
             return View(null);

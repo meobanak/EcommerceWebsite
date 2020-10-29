@@ -50,9 +50,7 @@ namespace EcommerceWebsite.Extensions
 
         public static Dictionary<string,object> ObjectToDictionary<T>(this T param)
         {
-            return param.GetType()
-             .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                  .ToDictionary(prop => prop.Name, prop => prop.GetValue(param, null));
+            return param.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public).ToDictionary(prop => prop.Name, prop => prop.GetValue(param, null));
         }
 
         public static T DictionaryToObject<T>(this IDictionary<string, object> source)

@@ -51,7 +51,7 @@ namespace EcommerceWebsite.Service.MongoDB.EcommerceFashionService
 
         public Dictionary<string, object> GetUser(Dictionary<string, object> param)
         {
-            var filter = Builders<User>.Filter.Eq(x => x.ID, Convert.ToInt32(param["ID"]));
+            var filter = Builders<User>.Filter.Eq(x => x.Email, param["email"].ToString());
             return DB.GetCollection<User>().Find(filter).FirstOrDefault().ObjectToDictionary();
         }
 
@@ -63,27 +63,27 @@ namespace EcommerceWebsite.Service.MongoDB.EcommerceFashionService
 
         public IList<Dictionary<string,object>> ListProduct()
         {
-            List<Product> products = DB.GetCollection<Product>().Find(new BsonDocument()).ToList();
-            List<Category> categories = DB.GetCollection<Category>().Find(new BsonDocument()).ToList();
-            List<FSize> sizes = DB.GetCollection<FSize>().Find(new BsonDocument()).ToList();
+            IList<Product> products = DB.GetCollection<Product>().Find(new BsonDocument()).ToList();
+            IList<Category> categories = DB.GetCollection<Category>().Find(new BsonDocument()).ToList();
+            IList<FSize> sizes = DB.GetCollection<FSize>().Find(new BsonDocument()).ToList();
 
-            var query = from product in products
-                        join category in categories on product.CategoryID equals category.ID
-                        join size in sizes on product.SizeID equals size.ID
-                        select new
-                        {
-                            ID = product.ID,
-                            CategoryName = category.Name,
-                            CategoryID = category.ID,
-                            ProductName = product.Name,
-                            Price = product.Price,
-                            Size = size.Name,
-                            SizeID = size.ID,
-                            Gender = product.Gender == 1 ? "Male" : "Female"
-                        }.ToDynamic();
+            var query = (from product in products
+                         join category in categories on product.CategoryID equals category.ID
+                         join size in sizes on product.SizeID equals size.ID
+                         select new
+                         {
+                             ID = product.ID,
+                             CategoryName = category.Name,
+                             CategoryID = category.ID,
+                             ProductName = product.Name,
+                             Price = product.Price,
+                             Size = size.Name,
+                             SizeID = size.ID,
+                             Gender = product.Gender == 1 ? "Male" : "Female"
+                         }).ToList();
 
 
-            return query.ToList().ToListDictionary();
+            return query.ToListDictionary();
         }
 
         public Dictionary<string,object> GetProduct(Dictionary<string, object> _product)
@@ -95,26 +95,26 @@ namespace EcommerceWebsite.Service.MongoDB.EcommerceFashionService
             List<Category> categories = DB.GetCollection<Category>().Find(new BsonDocument()).ToList();
             List<FSize> sizes = DB.GetCollection<FSize>().Find(new BsonDocument()).ToList();
 
-            var query = from product in products
-                        join category in categories on product.CategoryID equals category.ID
-                        join size in sizes on product.SizeID equals size.ID
-                        where product.ID == productID
-                        select new
-                        {
-                            ID = product.ID,
-                            Code = product.Code,
-                            CategoryID = product.CategoryID,
-                            Color = product.ColorID,
-                            ProductName = product.Name,
-                            Price = product.Price,
-                            Description = product.Description,
-                            IsActive = product.IsActive,
-                            Gender = product.Gender,
-                            SizeID = product.SizeID,
-                            imageSrc = product.imageSrc
-                        }.ToDynamic();
+            var query = (from product in products
+                         join category in categories on product.CategoryID equals category.ID
+                         join size in sizes on product.SizeID equals size.ID
+                         where product.ID == productID
+                         select new
+                         {
+                             ID = product.ID,
+                             Code = product.Code,
+                             CategoryID = product.CategoryID,
+                             Color = product.ColorID,
+                             ProductName = product.Name,
+                             Price = product.Price,
+                             Description = product.Description,
+                             IsActive = product.IsActive,
+                             Gender = product.Gender,
+                             SizeID = product.SizeID,
+                             imageSrc = product.imageSrc
+                         }).FirstOrDefault();
 
-            return query.FirstOrDefault();
+            return query.ObjectToDictionary();
         }
 
 

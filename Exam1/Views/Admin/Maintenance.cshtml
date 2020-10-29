@@ -1,7 +1,6 @@
 ﻿@using Newtonsoft.Json;
 
 
-@model IEnumerable<dynamic>
 
 @{
     ViewData["Title"] = "Maintenance";
@@ -22,28 +21,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var product in Model)
+        @foreach (var product in ViewBag.Products)
         {
-            var result = new Dictionary<string, object>();
-            var dictionary = product as IDictionary<string, object>;
-            foreach (var item in dictionary)
-            {
-                result.Add(item.Key, item.Value);
-            }
-
-            var json = JsonConvert.SerializeObject(result, Formatting.Indented);
-
-
             <tr>
-                <td>@product.ID</td>
-                <td>@product.CategoryName</td>
-                <td>@product.ProductName</td>
-                <td>@product.Price</td>
-                <td>@product.Size</td>
-                <td>@product.Gender</td>
+                <td>@product["ID"]</td>
+                <td>@product["CategoryName"]</td>
+                <td>@product["ProductName"]</td>
+                <td>@product["Price"]</td>
+                <td>@product["Size"]</td>
+                <td>@product["Gender"]</td>
                 <td>
-                    <button id="row-edit-@product.ID" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-edit" onclick="GetIDFromGrid('@product.ID')"> Edit </button> |
-                    <button id="row-delete-@product.ID" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-delete" onclick="GetIDFromGrid('@product.ID')">Delete</button>
+                    <button id="row-edit-@product["ID"]" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-edit" onclick="GetIDFromGrid('@product["ID"]')"> Edit </button> |
+                    <button id="row-delete-@product["ID"]" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirm-delete" onclick="GetIDFromGrid('@product["ID"]')">Delete</button>
                 </td>
             </tr>
         }
@@ -96,9 +85,9 @@
                             <div class="form-group">
                                 <label class="col-form-label">Color </label>
                                 <select id="cmbColor" class="form-control">
-                                    @foreach (FColor color in ViewBag.Colors)
+                                    @foreach (var color in ViewBag.Colors)
                                     {
-                                        <option value="@color.ID">@color.Name</option>
+                                        <option value="@color["ID"]">@color["Name"]</option>
                                     }
                                 </select>
                             </div><!-- /input-group -->
@@ -121,9 +110,9 @@
                             <div class="form-group">
                                 <label class="col-form-label">Category </label>
                                 <select class="form-control" id="cmbCategory">
-                                    @foreach (Category cate in ViewBag.Categories)
+                                    @foreach (var cate in ViewBag.Categories)
                                     {
-                                        <option value="@cate.ID">@cate.Name</option>
+                                        <option value="@cate["ID"]">@cate["Name"]</option>
                                     }
                                 </select>
                             </div>
@@ -145,9 +134,9 @@
                             <div class="form-group">
                                 <label class="col-form-label">Size</label>
                                 <select class="form-control" id="cmbSize">
-                                    @foreach (FSize size in ViewBag.Size)
+                                    @foreach (var size in ViewBag.Size)
                                     {
-                                        <option value="@size.ID">@size.Name</option>
+                                        <option value="@size["ID"]">@size["Name"]</option>
                                     }
                                 </select>
                             </div>
