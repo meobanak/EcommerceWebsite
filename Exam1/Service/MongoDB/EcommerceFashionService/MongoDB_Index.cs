@@ -43,10 +43,11 @@ namespace EcommerceWebsite.Service.MongoDB.EcommerceFashionService
             return DB.GetCollection<Product>().Find(filter).ToList().ToListDictionary();
         }
 
-        public void Delete(IDictionary<string, object> param)
+        public bool Delete(IDictionary<string, object> param)
         {
             var filter = Builders<Product>.Filter.Eq("ID", Convert.ToInt32(param["ID"]));
-            DB.GetCollection<Product>().DeleteOne(filter);
+            DeleteResult rs = DB.GetCollection<Product>().DeleteOne(filter);
+            return rs.IsAcknowledged;
         }
     }
 }

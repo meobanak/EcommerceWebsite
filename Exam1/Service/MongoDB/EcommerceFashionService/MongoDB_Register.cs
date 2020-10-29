@@ -3,6 +3,7 @@ using Exam1.Models;
 using Exam1.Service.Interface;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Nancy.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,30 +20,48 @@ namespace EcommerceWebsite.Service.MongoDB.EcommerceFashionService
             DB = db.GetDatabase<IMongoDatabase>();
         }
 
-        public void InsertUser(Dictionary<string, object> param)
+        public Dictionary<string,object> InsertUser(Dictionary<string, object> param)
         {
-            User model = param.DictionaryToObject<User>();
-            DB.GetCollection<User>().InsertOne(model);
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            bool rs = true;
+            try
+            {
+                User model = param.DictionaryToObject<User>();
+                DB.GetCollection<User>().InsertOne(model);
+                rs = true;
+                result["Result"] = rs;
+            }
+            catch (MongoWriteException e)
+            {
+                Console.WriteLine(e.Message);
+                rs = false;
+                result["Result"] = rs;
+            }
+            return result;
         }
 
-        public void UpdateUser(Dictionary<string, object> param)
+        public Dictionary<string, object> UpdateUser(Dictionary<string, object> param)
         {
+            Dictionary<string, object> result = new Dictionary<string, object>();
             var filter = Builders<User>.Filter.Eq(x => x.ID, Convert.ToInt32(param["ID"]));
-            DB.GetCollection<User>().UpdateOneExtend(filter, param);
+            ReplaceOneResult rs = DB.GetCollection<User>().ReplaceOne(filter, param.DictionaryToObject<User>());
+            result["Result"] = rs.IsAcknowledged;
+            return result;
         }
 
-        public User GetUser(Dictionary<string, object> param)
+        public Dictionary<string, object> GetUser(Dictionary<string, object> param)
         {
             var filter = Builders<User>.Filter.Eq(x => x.ID, Convert.ToInt32(param["ID"]));
-            return DB.GetCollection<User>().Find(filter).FirstOrDefault();
+            return DB.GetCollection<User>().Find(filter).FirstOrDefault().ObjectToDictionary();
         }
 
         public IList<Dictionary<string, object>> ListUser()
         {
-            return (IList<Dictionary<string, object>>)DB.GetCollection<User>().Find(new BsonDocument());
+            var filter = Builders<User>.Filter.Empty;
+            return DB.GetCollection<User>().Find(filter).ToList().ToListDictionary();
         }
 
-        public IEnumerable<dynamic> ListProduct()
+        public IList<Dictionary<string,object>> ListProduct()
         {
             List<Product> products = DB.GetCollection<Product>().Find(new BsonDocument()).ToList();
             List<Category> categories = DB.GetCollection<Category>().Find(new BsonDocument()).ToList();
@@ -61,12 +80,13 @@ namespace EcommerceWebsite.Service.MongoDB.EcommerceFashionService
                             Size = size.Name,
                             SizeID = size.ID,
                             Gender = product.Gender == 1 ? "Male" : "Female"
-                        }.ToExpando();
+                        }.ToDynamic();
 
-            return query;
+
+            return query.ToList().ToListDictionary();
         }
 
-        public object GetProduct(Dictionary<string, object> _product)
+        public Dictionary<string,object> GetProduct(Dictionary<string, object> _product)
         {
             var ob = _product.JsonObjectToDictionary();
             var productID = Convert.ToInt32(ob.FirstOrDefault(a => a.Key == "productID").Value);
@@ -92,37 +112,57 @@ namespace EcommerceWebsite.Service.MongoDB.EcommerceFashionService
                             Gender = product.Gender,
                             SizeID = product.SizeID,
                             imageSrc = product.imageSrc
-                        }.ToExpando();
+                        }.ToDynamic();
 
-            return query;
+            return query.FirstOrDefault();
         }
 
 
-        public IList<FSize> SizeList()
+        public IList<Dictionary<string,object>> SizeList()
         {
-            return DB.GetCollection<FSize>().Find(new BsonDocument()).ToList();
+            var filter = Builders<FSize>.Filter.Empty;
+            return DB.GetCollection<FSize>().Find(filter).ToList().ToListDictionary();
         }
 
-        public IList<Category> CategoriesList()
+        public IList<Dictionary<string,object>> CategoriesList()
         {
-            return DB.GetCollection<Category>().Find(new BsonDocument()).ToList();
+            var filter = Builders<Category>.Filter.Empty;
+            return DB.GetCollection<Category>().Find(filter).ToList().ToListDictionary();
         }
 
-        public IList<FColor> ColorList()
+        public IList<Dictionary<string, object>> ColorList()
         {
-            return DB.GetCollection<FColor>().Find(new BsonDocument()).ToList();
+            var filter = Builders<FColor>.Filter.Empty;
+            return DB.GetCollection<FColor>().Find(filter).ToList().ToListDictionary() ;
         }
 
-        public void InsertProduct(Dictionary<string, object> param)
+        public Dictionary<string,object> InsertProduct(Dictionary<string, object> param)
         {
+            Dictionary<string, object> result = new Dictionary<string, object>();
             Product product = param.DictionaryToObject<Product>();
-            DB.GetCollection<Product>().InsertOne(product);
+            bool rs = true;
+            try
+            {
+                DB.GetCollection<Product>().InsertOne(product);
+                result["Result"] = rs;
+            }
+            catch(MongoException ex)
+            {
+                rs = false;
+                result["Result"] = rs;
+                Console.WriteLine(ex);
+            }
+
+            return result;
         }
 
-        public void UpdateProduct(Dictionary<string, object> param)
+        public Dictionary<string, object> UpdateProduct(Dictionary<string, object> param)
         {
+            Dictionary<string, object> result = new Dictionary<string, object>();
             var filter = Builders<Product>.Filter.Eq(x => x.ID, Convert.ToInt32(param["ID"]));
-            DB.GetCollection<Product>().UpdateOneExtend(filter, param);
+            ReplaceOneResult rs =  DB.GetCollection<Product>().ReplaceOne(filter, param.DictionaryToObject<Product>());
+            result["Result"] = rs.IsAcknowledged;
+            return result;
         }
     }
 }

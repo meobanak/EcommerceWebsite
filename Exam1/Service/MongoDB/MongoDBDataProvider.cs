@@ -48,48 +48,24 @@ namespace EcommerceWebsite.Service.MongoDB
                 MongoDB_Register RegisterService = new MongoDB_Register(datacontext);
                 switch (action)
                 {
-                    case "InsertUser":
-                        RegisterService.InsertUser(param);
-                        break;
-
-                    case "UpdateUser":
-                        RegisterService.UpdateUser(param);
-                        break;
-
-                    case "GetUser":
-                        RegisterService.GetUser(param);
-                        break;
-
                     case "ListUser":
-                        RegisterService.ListUser();
+                        return RegisterService.ListUser();
                         break;
 
                     case "ListProduct":
-                        RegisterService.ListProduct();
-                        break;
-
-                    case "GetProduct":
-                        RegisterService.GetProduct(param);
+                        return RegisterService.ListProduct();
                         break;
 
                     case "SizeList":
-                        RegisterService.SizeList();
+                        return RegisterService.SizeList();
                         break;
 
                     case "CategoriesList":
-                        RegisterService.CategoriesList();
+                        return RegisterService.CategoriesList();
                         break;
 
                     case "ColorList":
-                        RegisterService.ColorList();
-                        break;
-
-                    case "InsertProduct":
-                        RegisterService.InsertProduct(param);
-                        break;
-
-                    case "UpdateProduct":
-                        RegisterService.UpdateProduct(param);
+                        return RegisterService.ColorList();
                         break;
 
                     default:
@@ -113,6 +89,40 @@ namespace EcommerceWebsite.Service.MongoDB
 
         public IDictionary<string, object> QueryForObject(string ServiceName, string action, Dictionary<string, object> param)
         {
+            if (ServiceName == "Register")
+            {
+                MongoDB_Register RegisterService = new MongoDB_Register(datacontext);
+                switch (action)
+                {
+                    case "InsertUser":
+                        return RegisterService.InsertUser(param);
+                        break;
+
+                    case "UpdateUser":
+                        return RegisterService.UpdateUser(param);
+                        break;
+
+                    case "GetUser":
+                        return RegisterService.GetUser(param);
+                        break;
+
+                    case "GetProduct":
+                        return RegisterService.GetProduct(param);
+                        break;
+
+                    case "InsertProduct":
+                        return RegisterService.InsertProduct(param);
+                        break;
+
+                    case "UpdateProduct":
+                        return RegisterService.UpdateProduct(param);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
             return null;
         }
     }

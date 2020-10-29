@@ -17,13 +17,14 @@ namespace EcommerceWebsite.Extensions
             return collection;
         }
 
-        public static void UpdateOneExtend<T>(this IMongoCollection<T> collectionName, FilterDefinition<T> filter, Dictionary<string, object> param)
-        {
-            foreach (var field in param)
-            {
-                var update = Builders<T>.Update.Set(param.Keys.ToString(), param.Values);
-                collectionName.UpdateOne(filter, update);
-            }
-        }
+        //public static UpdateResult UpdateOneExtend<T>(this IMongoCollection<T> collectionName, FilterDefinition<T> filter, Dictionary<string, object> param)
+        //{
+        //    foreach (var field in param)
+        //    {
+        //        var update = Builders<T>.Update.Set(param.Keys.ToString(), param.Values);
+        //        UpdateResult rs = collectionName.UpdateOne(filter, update);
+        //    }
+        //    return 
+        //}
     }
 }

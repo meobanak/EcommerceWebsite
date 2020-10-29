@@ -12,31 +12,36 @@ namespace EcommerceWebsite.Controllers
 {
     public class SignInController : Controller
     {
-        //private IRegister iregister;
-        
-
-        //public SignInController(IRegister service)
-        //{
-        //    iregister = service;
-        //}
+        private IDataProvider service;
 
 
-        //public IActionResult Login([Bind("ID,Email,FirstName,LastName,Password")] User model)
-        //{
-        //    List<User> users = iregister.ListUser();
-        //    IEnumerable<dynamic> products = iregister.ListProduct();
-        //    ViewBag.Categories = iregister.CategoriesList();
-        //    ViewBag.Size = iregister.SizeList();
-        //    ViewBag.Colors = iregister.ColorList();
+        public SignInController(IDataProvider _service)
+        {
+            service = _service;
+        }
 
-        //    foreach (User user in users)
-        //    {
-        //        if (user.Email == model.Email && user.Password == model.Password)
-        //        {
-        //            return View("~/Views/Admin/Maintenance.cshtml", products);
-        //        }
-        //    }
-        //    return View(null);
-        //}
+        public IActionResult Login([Bind("ID,Email,FirstName,LastName,Password")] Dictionary<string, object> model)
+        {
+            ViewBag.Products = service.QueryForList("Register","ListProduct",null);
+            ViewBag.Categories = service.QueryForList("Register", "CategoriesList", null);
+            ViewBag.Size = service.QueryForList("Register", "SizeList",null);
+            ViewBag.Colors = service.QueryForList("Register", "ColorList", null);
+
+            if (CheckUserExist(model))
+            {
+                return View("~/Views/Admin/Maintenance.cshtml");
+            }
+
+            return View(null);
+        }
+
+        private bool CheckUserExist(Dictionary<string, object> param)
+        {
+            var user = service.QueryForObject("Register", "GetUser", param);
+            if (user != null)
+                return true;
+            else
+                return false;
+        }
     }
 }
